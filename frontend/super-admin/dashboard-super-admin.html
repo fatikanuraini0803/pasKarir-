@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Super Admin | Super Admin</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/admin-common.css">
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body><a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+<div class="brand">
+<img alt="" class="brand__img" height="40" src="../assets/img/logo.svg" width="40"/>
+<span class="brand__name">Paskarir</span>
+</div>
+<nav aria-label="Menu utama" class="nav">
+<ul class="nav__list">
+<li><a aria-current="page" class="nav__link" href="dashboard-super-admin.html"><span aria-hidden="true" class="icon icon--home"></span>Dashboard</a></li>
+<li><a class="nav__link" href="akun-hak-akses.html"><span aria-hidden="true" class="icon icon--users"></span>Akun dan Hak Akses</a></li>
+<li><a class="nav__link" href="lowongan-persyaratan.html"><span aria-hidden="true" class="icon icon--briefcase"></span>Lowongan dan Persyaratan</a></li>
+<li><a class="nav__link" href="data-pelatihan.html"><span aria-hidden="true" class="icon icon--database"></span>Data Pelatihan</a></li>
+<li><a class="nav__link" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--target"></span>Pengaturan Model</a></li>
+</ul>
+</nav>
+<div class="sidebar__footer">
+<a class="logout" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</aside>
+<!-- TOPBAR -->
+<header class="topbar">
+<div class="topbar__start">
+<button aria-label="Buka/tutup menu" class="menu-btn" type="button"><span aria-hidden="true" class="icon icon--menu"></span></button>
+<nav aria-label="Breadcrumb" class="breadcrumb">
+<ol class="breadcrumb__list">
+<li class="breadcrumb__item"><a href="dashboard-super-admin.html">Super Admin</a></li>
+<li aria-current="page" class="breadcrumb__item">Dashboard</li>
+</ol>
+</nav>
+</div>
+<details class="profile-menu">
+<summary class="profile" aria-label="Menu profil">
+<span class="profile__info">
+<span class="profile__name" style="display:block">Nama Super Admin</span>
+<span class="profile__role" style="display:block">Super Admin</span>
+</span>
+<span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span>
+<span aria-hidden="true" class="icon icon--chevron"></span>
+</summary>
+<div class="profile-menu__list">
+<div class="profile-menu__head"><strong>Nama Super Admin</strong><small>nama@email.com</small><span class="badge badge--info">Super Admin</span></div>
+<a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil</a>
+<a href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span>Tambah Akun</a>
+<a class="is-danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</details>
+</header>
+<!-- KONTEN UTAMA -->
+<main class="main" id="main-content">
+<header class="page-header">
+<h1>Dashboard Super Admin</h1>
+<p class="page-header__desc">Ringkasan seluruh sistem: akun, data pelatihan, dan performa model.</p>
+</header>
+<section aria-label="Ringkasan" class="stats">
+<article class="stat-card">
+<span class="stat-card__icon"><span aria-hidden="true" class="icon icon--users icon--lg"></span></span>
+<div>
+<p class="stat-card__label">Total akun</p>
+<p class="stat-card__value">XX</p>
+</div>
+</article>
+<article class="stat-card">
+<span class="stat-card__icon"><span aria-hidden="true" class="icon icon--shield icon--lg"></span></span>
+<div>
+<p class="stat-card__label">Sub Admin</p>
+<p class="stat-card__value">XX</p>
+</div>
+</article>
+<article class="stat-card stat-card--primary">
+<span class="stat-card__icon"><span aria-hidden="true" class="icon icon--database icon--lg"></span></span>
+<div>
+<p class="stat-card__label">Data pelatihan</p>
+<p class="stat-card__value">XXXX</p>
+</div>
+</article>
+<article class="stat-card">
+<span class="stat-card__icon"><span aria-hidden="true" class="icon icon--chart icon--lg"></span></span>
+<div>
+<p class="stat-card__label">Akurasi model</p>
+<p class="stat-card__value">XX%</p>
+</div>
+</article>
+</section>
+<div class="layout-split layout-split--dashboard">
+<section aria-labelledby="judul-grafik" class="card chart-card">
+<div class="chart-card__header">
+<h2 id="judul-grafik">Klasifikasi per bulan</h2>
+<p class="text-muted text-xs">Sesuai</p>
+</div>
+<ol class="chart">
+<li class="chart__col"><span class="chart__bar"></span><span class="chart__label">Mei</span></li>
+<li class="chart__col"><span class="chart__bar"></span><span class="chart__label">Jun</span></li>
+<li class="chart__col"><span class="chart__bar"></span><span class="chart__label">Jul</span></li>
+<li class="chart__col"><span class="chart__bar"></span><span class="chart__label">Agu</span></li>
+<li class="chart__col"><span class="chart__bar"></span><span class="chart__label">Sep</span></li>
+<li class="chart__col chart__col--active"><span class="chart__bar"></span><span class="chart__label">Okt</span></li>
+</ol>
+</section>
+<section aria-labelledby="judul-status" class="card card--navy model-status">
+<h2 class="card__title" id="judul-status"><span aria-hidden="true" class="icon icon--target"></span> Status model</h2>
+<dl class="model-status__list">
+<div>
+<dt class="model-status__label">Terakhir dilatih</dt>
+<dd class="model-status__value">dd/mm/yyyy hh:mm</dd>
+</div>
+<div>
+<dt class="model-status__label">Kriteria / kedalaman</dt>
+<dd class="model-status__value">Gini | Depth 5</dd>
+</div>
+<div>
+<dt class="model-status__label">Akurasi</dt>
+<dd class="model-status__value">XX%</dd>
+</div>
+</dl>
+<a class="btn btn--outline btn--block" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--arrow"></span> Buka Pengaturan Model</a>
+</section>
+</div>
+</main>
+</div>
+<!-- MODAL KELUAR -->
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal" id="keluar" role="dialog">
+<a aria-label="Batal" class="modal__backdrop" href="#"></a>
+<div class="dialog">
+<span aria-hidden="true" class="dialog__icon"><span class="icon icon--logout"></span></span>
+<div>
+<h2 class="text-h3" id="keluar-judul">Keluar dari akun?</h2>
+<p class="dialog__desc">Kamu perlu masuk lagi untuk mengakses panel admin.</p>
+<div class="dialog__actions"><a class="btn btn--outline" href="#">Batal</a><a class="btn btn--primary" href="../admin-menu.html">Ya, Keluar</a></div>
+</div>
+</div>
+</div>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+<script src="../../backend/js/shared/admin-menu.js" defer></script>
+</body>
+</html>

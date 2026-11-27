@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Masuk | Paskarir</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/variables.css" rel="stylesheet"/>
+<link href="css/base.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-user.css" rel="stylesheet"/>
+<link href="css/layout.css" rel="stylesheet"/>
+<link href="css/components.css" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body class="auth-page">
+<div aria-hidden="true" class="auth__bg" inert="">
+<header class="site-header">
+<div class="container site-header__inner">
+<a class="brand" href="../../index.html"><img alt="" height="32" src="../assets/img/logo.svg" width="32"/><span>Paskarir</span></a>
+<nav aria-label="Menu utama" class="site-nav">
+<ul class="site-nav__links">
+<li><a class="site-nav__link" href="../../index.html">Beranda</a></li>
+<li><a class="site-nav__link" href="#fitur">Lowongan</a></li>
+<li><a class="site-nav__link" href="#cara-kerja">Cara Kerja</a></li>
+</ul>
+<div class="site-nav__actions">
+<a class="btn btn--outline" href="daftar.html">Daftar</a>
+<a class="btn btn--primary" href="login.html"><span aria-hidden="true" class="icon icon--user"></span> Login</a>
+</div>
+</nav>
+</div>
+</header>
+<div class="auth__bg-main">
+<section class="hero">
+<div class="container hero__inner">
+<div>
+<p class="hero__tag">Berbasis Decision Tree</p>
+<h1 class="hero__title">Cek kesesuaianmu dengan lowongan kerja</h1>
+<p class="hero__text">Isi keterampilan, pendidikan, pengalaman, dan sertifikasi. Tanpa unggah berkas lamaran. Hasil langsung beserta alasannya.</p>
+<div class="hero__actions">
+<a class="btn btn--light btn--lg" href="login.html"><span aria-hidden="true" class="icon icon--check"></span> Cek Kesesuaian</a>
+<a class="btn btn--ghost-light btn--lg" href="#fitur"><span aria-hidden="true" class="icon icon--search"></span> Lihat Lowongan</a>
+</div>
+<dl class="hero__stats">
+<div class="hero__stat"><dt class="visually-hidden">Jumlah lowongan</dt><dd><strong>12+</strong><span>Lowongan</span></dd></div>
+<div class="hero__stat"><dt class="visually-hidden">Waktu proses</dt><dd><strong>&lt; 1 mnt</strong><span>Waktu proses</span></dd></div>
+</dl>
+</div>
+<figure class="hero__media"><svg aria-label="Ilustrasi pohon keputusan" role="img" viewbox="0 0 240 180">
+<g fill="none" stroke="#2563eb" stroke-linecap="round" stroke-width="3"><path d="M120 34v28M120 62 60 100M120 62l60 38M60 100 30 140M60 100l30 40M180 100l-30 40M180 100l30 40" pathLength="100"></path></g>
+<circle cx="120" cy="26" fill="#2563eb" r="14"></circle><circle cx="60" cy="100" fill="#021a4a" r="12"></circle><circle cx="180" cy="100" fill="#021a4a" r="12"></circle>
+<circle cx="30" cy="148" fill="#16a34a" r="10"></circle><circle cx="90" cy="148" fill="#dc2626" r="10"></circle><circle cx="150" cy="148" fill="#16a34a" r="10"></circle><circle cx="210" cy="148" fill="#dc2626" r="10"></circle></svg><figcaption class="visually-hidden">Contoh jalur keputusan sesuai atau tidak sesuai</figcaption></figure>
+</div>
+</section>
+<section class="features">
+<div class="container">
+<h2 class="visually-hidden">Fitur utama</h2>
+<div class="features__grid">
+<article class="card feature"><span class="icon-tile"><span aria-hidden="true" class="icon icon--check"></span></span><h3>Klasifikasi Sesuai / Tidak</h3><p class="feature__text">Hasil langsung beserta alasannya.</p><a class="feature__link" href="login.html">Selengkapnya <span aria-hidden="true" class="icon icon--arrow"></span></a></article>
+<article class="card card--dark feature"><span class="icon-tile"><span aria-hidden="true" class="icon icon--briefcase"></span></span><h3>Rekomendasi Lowongan</h3><p class="feature__text">Lowongan lain yang cocok untukmu.</p><a class="feature__link" href="login.html">Selengkapnya <span aria-hidden="true" class="icon icon--arrow"></span></a></article>
+<article class="card feature"><span class="icon-tile"><span aria-hidden="true" class="icon icon--clock"></span></span><h3>Riwayat Klasifikasi</h3><p class="feature__text">Lihat kembali hasil sebelumnya.</p><a class="feature__link" href="login.html">Selengkapnya <span aria-hidden="true" class="icon icon--arrow"></span></a></article>
+</div>
+</div>
+</section>
+<section class="how">
+<div class="container">
+<h2 class="how__title">Cara Kerja</h2>
+<ol class="how__steps">
+<li class="how__step"><span class="num num--lg">1</span>Isi data diri</li><li aria-hidden="true" class="how__line"></li>
+<li class="how__step"><span class="num num--lg">2</span>Pilih lowongan</li><li aria-hidden="true" class="how__line"></li>
+<li class="how__step"><span class="num num--lg">3</span>Proses</li><li aria-hidden="true" class="how__line"></li>
+<li class="how__step"><span class="num num--lg">4</span>Lihat hasil</li>
+</ol>
+</div>
+</section>
+</div>
+</div>
+<div class="auth__overlay" aria-hidden="true"></div>
+<main class="auth" id="main-content">
+<section aria-labelledby="login-judul" class="modal__box">
+<a aria-label="Tutup" class="modal__close" href="../../index.html"><span aria-hidden="true" class="icon icon--close"></span></a>
+<div class="modal__brand"><a class="brand" href="../../index.html"><img alt="" height="32" src="../assets/img/logo.svg" width="32"/><span>Paskarir</span></a></div>
+<h1 class="modal__title" id="login-judul">Masuk</h1>
+<p class="modal__lead">Masukkan email dan password untuk melanjutkan.</p>
+<form action="dashboard.html" class="form" method="get">
+<div class="field"><label class="field__label" for="login-email">Email</label><span class="input-wrap"><span aria-hidden="true" class="icon icon--mail"></span><input autocomplete="email" class="input" id="login-email" name="email" placeholder="nama@email.com" required="" type="email"/></span></div>
+<div class="field"><label class="field__label" for="login-password">Password</label><span class="input-wrap"><span aria-hidden="true" class="icon icon--lock"></span><input autocomplete="current-password" class="input input--end" id="login-password" name="password" placeholder="********" required="" type="password"/><button aria-controls="login-password" aria-label="Tampilkan password" aria-pressed="false" class="pw-toggle" data-toggle-password="login-password" type="button"><span aria-hidden="true" class="icon icon--eye"></span></button></span></div>
+<div class="form__row-between">
+<label class="choice"><input name="ingat" type="checkbox"/> Ingat saya</label>
+<a href="lupa-password.html">Lupa password?</a>
+</div>
+<button class="btn btn--primary btn--block" type="submit">Masuk <span aria-hidden="true" class="icon icon--arrow"></span></button>
+<p class="form__note">Belum punya akun? <a href="daftar.html"><strong>Daftar</strong></a></p>
+<details class="demo-accounts">
+<summary>Lihat akun contoh</summary>
+<p class="demo-accounts__hint">Klik salah satu untuk mengisi email dan password otomatis.</p>
+<ul class="demo-accounts__list">
+<li><button type="button" data-demo-email="andi@email.com" data-demo-password="User12345"><strong>User</strong><span>andi@email.com</span></button></li>
+<li><button type="button" data-demo-email="siti@email.com" data-demo-password="Admin12345"><strong>Sub Admin</strong><span>siti@email.com</span></button></li>
+<li><button type="button" data-demo-email="budi@email.com" data-demo-password="Super12345"><strong>Super Admin</strong><span>budi@email.com</span></button></li>
+</ul>
+</details>
+
+</form>
+</section>
+</main>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/user/auth.js"></script>
+</body>
+</html>

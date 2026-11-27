@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pengaturan Model | Super Admin</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/admin-common.css">
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body><a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+<div class="brand">
+<img alt="" class="brand__img" height="40" src="../assets/img/logo.svg" width="40"/>
+<span class="brand__name">Paskarir</span>
+</div>
+<nav aria-label="Menu utama" class="nav">
+<ul class="nav__list">
+<li><a class="nav__link" href="dashboard-super-admin.html"><span aria-hidden="true" class="icon icon--home"></span>Dashboard</a></li>
+<li><a class="nav__link" href="akun-hak-akses.html"><span aria-hidden="true" class="icon icon--users"></span>Akun dan Hak Akses</a></li>
+<li><a class="nav__link" href="lowongan-persyaratan.html"><span aria-hidden="true" class="icon icon--briefcase"></span>Lowongan dan Persyaratan</a></li>
+<li><a class="nav__link" href="data-pelatihan.html"><span aria-hidden="true" class="icon icon--database"></span>Data Pelatihan</a></li>
+<li><a aria-current="page" class="nav__link" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--target"></span>Pengaturan Model</a></li>
+</ul>
+</nav>
+<div class="sidebar__footer">
+<a class="logout" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</aside>
+<!-- TOPBAR -->
+<header class="topbar">
+<div class="topbar__start">
+<button aria-label="Buka/tutup menu" class="menu-btn" type="button"><span aria-hidden="true" class="icon icon--menu"></span></button>
+<nav aria-label="Breadcrumb" class="breadcrumb">
+<ol class="breadcrumb__list">
+<li class="breadcrumb__item"><a href="dashboard-super-admin.html">Super Admin</a></li>
+<li aria-current="page" class="breadcrumb__item">Pengaturan Model</li>
+</ol>
+</nav>
+</div>
+<details class="profile-menu">
+<summary class="profile" aria-label="Menu profil">
+<span class="profile__info">
+<span class="profile__name" style="display:block">Nama Super Admin</span>
+<span class="profile__role" style="display:block">Super Admin</span>
+</span>
+<span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span>
+<span aria-hidden="true" class="icon icon--chevron"></span>
+</summary>
+<div class="profile-menu__list">
+<div class="profile-menu__head"><strong>Nama Super Admin</strong><small>nama@email.com</small><span class="badge badge--info">Super Admin</span></div>
+<a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil</a>
+<a href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span>Tambah Akun</a>
+<a class="is-danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</details>
+</header>
+<!-- KONTEN UTAMA -->
+<main class="main" id="main-content">
+<header class="page-header">
+<h1>Pengaturan Model Decision Tree</h1>
+<p class="page-header__desc">Atur parameter lalu latih ulang. Hasil evaluasi dihitung dari data uji saat pelatihan, bukan real time.</p>
+</header>
+<div class="layout-split layout-split--model">
+<section aria-labelledby="judul-parameter" class="card">
+<h2 class="card__title" id="judul-parameter"><span aria-hidden="true" class="icon icon--target icon--lg"></span> Parameter model</h2>
+<form action="#" class="stack" method="post">
+<div class="form-group">
+<label class="label" for="kriteria">Kriteria pemisahan</label>
+<div class="control">
+<span aria-hidden="true" class="icon icon--chart"></span>
+<select class="select" id="kriteria" name="kriteria">
+<option>Gini / Entropy</option>
+<option>Gini</option>
+<option>Entropy</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label class="label" for="kedalaman">Kedalaman maksimum</label>
+<div class="control">
+<span aria-hidden="true" class="icon icon--database"></span>
+<input class="input" id="kedalaman" min="1" name="kedalaman" placeholder="5" type="number"/>
+</div>
+</div>
+<div class="form-group">
+<label class="label" for="rasio">Rasio data uji (%)</label>
+<div class="control">
+<span aria-hidden="true" class="icon icon--document"></span>
+<input class="input" id="rasio" max="99" min="1" name="rasio" placeholder="20" type="number"/>
+</div>
+</div>
+<button class="btn btn--primary btn--block" type="submit"><span aria-hidden="true" class="icon icon--target"></span> Latih Ulang Model</button>
+<p class="form-hint">Terakhir dilatih: dd/mm/yyyy hh:mm</p>
+</form>
+</section>
+<section aria-labelledby="judul-evaluasi" class="card">
+<div class="card__header">
+<h2 id="judul-evaluasi">Hasil evaluasi</h2>
+<span class="badge badge--info">Dari hasil pelatihan</span>
+</div>
+<div class="metrics">
+<div class="metric metric--primary"><p class="metric__label">Accuracy</p><p class="metric__value">-- %</p></div>
+<div class="metric"><p class="metric__label">Precision</p><p class="metric__value">-- %</p></div>
+<div class="metric"><p class="metric__label">Recall</p><p class="metric__value">-- %</p></div>
+<div class="metric"><p class="metric__label">F1-score</p><p class="metric__value">-- %</p></div>
+</div>
+<h3 class="stack-title">Confusion matrix</h3>
+<table class="matrix">
+<caption class="visually-hidden">Confusion matrix model</caption>
+<thead>
+<tr>
+<td></td>
+<th scope="col">Pred. Sesuai</th>
+<th scope="col">Pred. Tidak</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Aktual Sesuai</th>
+<td><span class="matrix__cell matrix__cell--hit">TP</span></td>
+<td><span class="matrix__cell">FN</span></td>
+</tr>
+<tr>
+<th scope="row">Aktual Tidak</th>
+<td><span class="matrix__cell">FP</span></td>
+<td><span class="matrix__cell matrix__cell--hit">TN</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<aside class="card card--muted info-card">
+<span aria-hidden="true" class="icon icon--help"></span>
+<div>
+<h2 class="text-h3">Bagaimana evaluasi dihitung?</h2>
+<p class="info-card__text">Data dibagi menjadi data latih dan data uji sesuai rasio. Metrik dihitung dari data uji setiap kali model dilatih ulang, lalu disimpan.</p>
+</div>
+</aside>
+</main>
+</div>
+<!-- MODAL KELUAR -->
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal" id="keluar" role="dialog">
+<a aria-label="Batal" class="modal__backdrop" href="#"></a>
+<div class="dialog">
+<span aria-hidden="true" class="dialog__icon"><span class="icon icon--logout"></span></span>
+<div>
+<h2 class="text-h3" id="keluar-judul">Keluar dari akun?</h2>
+<p class="dialog__desc">Kamu perlu masuk lagi untuk mengakses panel admin.</p>
+<div class="dialog__actions"><a class="btn btn--outline" href="#">Batal</a><a class="btn btn--primary" href="../admin-menu.html">Ya, Keluar</a></div>
+</div>
+</div>
+</div>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+<script src="../../backend/js/super-admin/pengaturan-model.js"></script>
+<script src="../../backend/js/shared/admin-menu.js" defer></script>
+</body>
+</html>

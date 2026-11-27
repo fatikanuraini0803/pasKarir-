@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Isi data keterampilan, pendidikan, dan pengalaman untuk mengecek kesesuaian lowongan." name="description"/>
+<title>Form Klasifikasi | Paskarir</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/variables.css" rel="stylesheet"/>
+<link href="css/base.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-user.css" rel="stylesheet"/>
+<link href="css/layout.css" rel="stylesheet"/>
+<link href="css/components.css" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body><a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+<input aria-label="Buka menu navigasi" class="nav-toggle" id="nav-toggle" type="checkbox"/>
+<aside aria-label="Menu utama" class="sidebar">
+<a class="brand" href="../../index.html"><img alt="" height="32" src="../assets/img/logo.svg" width="32"/><span>Paskarir</span></a>
+<nav aria-label="Menu aplikasi" class="sidebar__menu"><ul class="sidebar__nav"><li><a class="nav-link" href="dashboard.html"><span aria-hidden="true" class="icon icon--home"></span><span>Dashboard</span></a></li><li><a aria-current="page" class="nav-link" href="klasifikasi.html"><span aria-hidden="true" class="icon icon--check"></span><span>Klasifikasi</span></a></li><li><a class="nav-link" href="lowongan.html"><span aria-hidden="true" class="icon icon--briefcase"></span><span>Lowongan</span></a></li><li><a class="nav-link" href="riwayat.html"><span aria-hidden="true" class="icon icon--clock"></span><span>Riwayat</span></a></li></ul></nav>
+<div class="sidebar__footer">
+<a class="nav-link nav-link--danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span><span>Keluar</span></a>
+</div>
+</aside>
+<div class="app__main">
+<header class="topbar">
+<div class="topbar__left">
+<label aria-label="Menu" class="icon-btn nav-toggle-label" for="nav-toggle"><span aria-hidden="true" class="icon icon--menu"></span></label>
+<nav aria-label="Breadcrumb"><ol class="breadcrumb"><li><span aria-hidden="true" class="icon icon--home"></span></li><li><a href="dashboard.html">Beranda</a></li><li aria-hidden="true" class="breadcrumb__sep">/</li><li aria-current="page">Klasifikasi</li></ol></nav>
+</div>
+<details class="profile">
+<summary class="profile__toggle">
+<span class="profile__name"><strong>Nama User</strong><span>User</span></span>
+<span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span><span aria-hidden="true" class="icon icon--chevron"></span>
+</summary>
+<div class="profile__menu">
+<div class="profile__info"><strong>Nama User</strong><small>nama@email.com</small><span class="badge badge--primary">User</span></div>
+<a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil Saya</a>
+<a href="ubah-password.html"><span aria-hidden="true" class="icon icon--lock"></span>Ubah Password</a>
+<a href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</details>
+</header>
+<main class="content" id="main-content">
+<div class="page-head"><h1>Form Klasifikasi</h1><p>Isi data berikut dengan jujur. Semua kolom wajib diisi sebelum menekan "Proses".</p></div>
+<div class="split split--even">
+<section aria-labelledby="langkah" class="card">
+<p class="form-step" id="langkah">Langkah 1 dari 1 | Data kesesuaian</p>
+<form action="hasil.html" class="form" method="get">
+<div class="field"><label class="field__label" for="lowongan">Lowongan yang dituju</label><span class="input-wrap"><span aria-hidden="true" class="icon icon--search"></span><input class="input input--pill" id="lowongan" list="daftar-lowongan" name="lowongan" placeholder="Pilih lowongan" required=""/></span><datalist id="daftar-lowongan"><option value="Staf Pemrograman"><option value="Staf Administrasi"><option value="Asisten Operasional"><option value="Analis Data"><option value="Admin Perkantoran"><option value="Staf Layanan"></option></option></option></option></option></option></datalist></div>
+<fieldset class="field fieldset-reset"><legend class="field__label">Keterampilan utama</legend>
+<div class="input input--tags input--pill"><span class="chip">Pemrograman <button aria-label="Hapus Pemrograman" class="chip__remove" type="button">×</button></span><span class="chip">Basis Data <button aria-label="Hapus Basis Data" class="chip__remove" type="button">×</button></span><label class="visually-hidden" for="skill-baru">Tambah keterampilan</label><input class="tag-input" id="skill-baru" name="keterampilan" placeholder="+ tambah keterampilan"/></div>
+</fieldset>
+<div class="form-row">
+<div class="field"><label class="field__label" for="pendidikan">Tingkat pendidikan</label><select class="input input--pill" id="pendidikan" name="pendidikan" required=""><option value="">Pilih</option><option>SMA / SMK</option><option>D3</option><option>S1 / D4</option><option>S2</option></select></div>
+<div class="field"><label class="field__label" for="pengalaman">Lama pengalaman kerja (tahun)</label><input class="input input--pill" id="pengalaman" max="50" min="0" name="pengalaman" required="" type="number" value="0"/></div>
+</div>
+<fieldset class="field fieldset-reset"><legend class="field__label">Punya sertifikasi?</legend>
+<div class="choice-group"><label class="choice"><input checked="" name="sertifikasi" type="radio" value="ya"/> Ya</label><label class="choice"><input name="sertifikasi" type="radio" value="tidak"/> Tidak</label></div></fieldset>
+<div class="form__actions"><button class="btn btn--primary btn--lg" type="submit"><span aria-hidden="true" class="icon icon--check"></span> Proses</button><button class="btn btn--outline btn--lg" type="reset">Reset</button><span class="muted toolbar__count">Hasil tampil di halaman berikutnya</span></div>
+</form>
+</section>
+<aside aria-labelledby="petunjuk" class="card card--panel"><h2 class="card__title card__title--gap" id="petunjuk">? Petunjuk pengisian</h2>
+<ol class="item-list">
+<li class="item item--step"><span class="num num--dark">1</span><div><p class="item__title">Pilih lowongan</p><p class="item__sub">Sesuai target lamaranmu.</p></div></li>
+<li class="item item--step"><span class="num num--dark">2</span><div><p class="item__title">Tambah keterampilan</p><p class="item__sub">Yang kamu kuasai.</p></div></li>
+<li class="item item--step"><span class="num num--dark">3</span><div><p class="item__title">Isi pendidikan</p><p class="item__sub">Pendidikan terakhir dan lama pengalaman.</p></div></li>
+<li class="item item--step"><span class="num num--dark">4</span><div><p class="item__title">Sertifikasi</p><p class="item__sub">Pilih Ya jika punya yang relevan.</p></div></li>
+</ol></aside>
+</div>
+</main>
+<footer class="app__footer"><small>© 2026 Paskarir | Kelompok 12 - 5IF1 | Semua hak dilindungi</small></footer>
+</div>
+</div>
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal modal--confirm" id="keluar" role="dialog">
+<a aria-label="Tutup" class="modal__backdrop" href="#"></a>
+<div class="modal__box">
+<h2 class="modal__title" id="keluar-judul">Keluar dari akun?</h2>
+<p class="modal__lead">Kamu akan keluar dan diarahkan ke halaman Login.</p>
+<div class="modal__actions modal__actions--center">
+<a class="btn btn--danger" href="login.html">Ya, Keluar</a>
+<a class="btn btn--outline" href="#">Batal</a>
+</div>
+</div>
+</div>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/chips.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/user/classifier.js"></script>
+<script src="../../backend/js/user/klasifikasi.js"></script>
+</body>
+</html>

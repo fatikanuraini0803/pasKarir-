@@ -1,0 +1,55 @@
+/* variables.css - design token: satu sumber nilai untuk warna, font, jarak, radius */
+:root {
+  /* Warna (diambil dari wireframe Tahap 2) */
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-tint: #e8f0ff;
+  --color-navy: #021a4a;
+  --color-bg-app: #eaf1ff;
+  --color-bg-soft: #f7f7f8;
+  --color-panel: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+  --color-muted: #4b5563;
+  --color-border: #e5e7eb;
+  --color-success: #16a34a;
+  --color-success-bg: #e6f4ea;
+  --color-success-badge: #d1f0dc;
+  --color-success-text: #15803d;
+  --color-danger: #dc2626;
+  --color-danger-badge: #fee2e2;
+  --color-danger-text: #b91c1c;
+
+  /* Tipografi */
+  --font-base: "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.5rem;
+  --fs-hero: clamp(2rem, 4vw, 3rem);
+  --lh-tight: 1.2;
+  --lh-base: 1.6;
+
+  /* Jarak (skala 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Bentuk */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 2px 10px rgba(2, 26, 74, 0.08);
+
+  /* Ukuran layout */
+  --sidebar-w: 15rem;
+  --container-w: 75rem;
+  --topbar-h: 3.5rem;
+}

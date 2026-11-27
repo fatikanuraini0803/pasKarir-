@@ -1,0 +1,173 @@
+-- ============================================================
+-- PasKarir - skema dan data contoh (MySQL / MariaDB)
+-- Cara pakai: phpMyAdmin > Import > pilih file ini.
+-- ============================================================
+CREATE DATABASE IF NOT EXISTS paskarir_exam CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE paskarir_exam;
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS password_resets;
+DROP TABLE IF EXISTS riwayat_klasifikasi;
+DROP TABLE IF EXISTS dataset_pelatihan;
+DROP TABLE IF EXISTS lowongan_keterampilan;
+DROP TABLE IF EXISTS lowongan;
+DROP TABLE IF EXISTS keterampilan;
+DROP TABLE IF EXISTS users;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Akun pengguna. Password disimpan sebagai hash bcrypt (password_hash PHP), bukan teks asli.
+CREATE TABLE users (
+  id            INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nama          VARCHAR(100) NOT NULL,
+  email         VARCHAR(120) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  telepon       VARCHAR(20)  NOT NULL DEFAULT '-',
+  role          ENUM('User','Sub Admin','Super Admin') NOT NULL DEFAULT 'User',
+  status        ENUM('Aktif','Nonaktif') NOT NULL DEFAULT 'Aktif',
+  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_users_email (email)
+) ENGINE=InnoDB;
+
+-- Token reset password (fitur Lupa Password). Hanya hash token yang disimpan.
+CREATE TABLE password_resets (
+  id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id    INT UNSIGNED NOT NULL,
+  token_hash CHAR(64)     NOT NULL,
+  expires_at DATETIME     NOT NULL,
+  used_at    DATETIME     NULL,
+  created_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_reset_token (token_hash),
+  KEY idx_reset_user (user_id),
+  CONSTRAINT fk_reset_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- Master keterampilan (dipakai bersama oleh banyak lowongan).
+CREATE TABLE keterampilan (
+  id   INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nama VARCHAR(60) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_keterampilan_nama (nama)
+) ENGINE=InnoDB;
+
+-- Lowongan kerja (umum, tidak hanya bidang IT).
+CREATE TABLE lowongan (
+  id             INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nama           VARCHAR(100) NOT NULL,
+  bidang         VARCHAR(50)  NOT NULL,
+  deskripsi      VARCHAR(500) NOT NULL DEFAULT '',
+  pendidikan_min ENUM('SMA / SMK','D3','S1 / D4','S2') NOT NULL,
+  pengalaman_min TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  status         ENUM('Aktif','Ditutup') NOT NULL DEFAULT 'Aktif',
+  dibuat_oleh    INT UNSIGNED NULL,
+  created_at     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_lowongan_bidang (bidang),
+  CONSTRAINT fk_lowongan_user FOREIGN KEY (dibuat_oleh) REFERENCES users (id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- Relasi banyak-ke-banyak: satu lowongan punya banyak syarat keterampilan.
+CREATE TABLE lowongan_keterampilan (
+  lowongan_id     INT UNSIGNED NOT NULL,
+  keterampilan_id INT UNSIGNED NOT NULL,
+  PRIMARY KEY (lowongan_id, keterampilan_id),
+  CONSTRAINT fk_lk_lowongan     FOREIGN KEY (lowongan_id)     REFERENCES lowongan (id)     ON DELETE CASCADE,
+  CONSTRAINT fk_lk_keterampilan FOREIGN KEY (keterampilan_id) REFERENCES keterampilan (id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- Riwayat hasil klasifikasi tiap pelamar.
+-- Aksi Hapus di halaman Riwayat memakai: DELETE FROM riwayat_klasifikasi WHERE id = :id AND user_id = :uid
+-- (user_id dicek agar User hanya bisa menghapus riwayatnya sendiri).
+-- Lowongan yang sudah punya riwayat tidak bisa dihapus (RESTRICT); riwayat ikut terhapus bila akun dihapus (CASCADE).
+CREATE TABLE riwayat_klasifikasi (
+  id                   INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id              INT UNSIGNED NOT NULL,
+  lowongan_id          INT UNSIGNED NOT NULL,
+  keterampilan_pelamar VARCHAR(700) NOT NULL,
+  pendidikan           ENUM('SMA / SMK','D3','S1 / D4','S2') NOT NULL,
+  pengalaman           TINYINT UNSIGNED NOT NULL,
+  sertifikasi          ENUM('ya','tidak') NOT NULL DEFAULT 'tidak',
+  skor                 TINYINT UNSIGNED NOT NULL,
+  label                ENUM('SESUAI','TIDAK SESUAI') NOT NULL,
+  created_at           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_riwayat_user (user_id, created_at),
+  CONSTRAINT fk_riwayat_user     FOREIGN KEY (user_id)     REFERENCES users (id)    ON DELETE CASCADE,
+  CONSTRAINT fk_riwayat_lowongan FOREIGN KEY (lowongan_id) REFERENCES lowongan (id) ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+
+-- Dataset sumber Decision Tree (60 baris dari dataset.xlsx). ID hanya identitas, bukan fitur model.
+CREATE TABLE dataset_pelatihan (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  kode VARCHAR(20) NOT NULL UNIQUE, usia TINYINT UNSIGNED NOT NULL,
+  pendidikan VARCHAR(30) NOT NULL, pengalaman_kerja VARCHAR(40) NOT NULL, bidang_minat VARCHAR(60) NOT NULL,
+  skor_komputer TINYINT UNSIGNED NOT NULL, skor_komunikasi TINYINT UNSIGNED NOT NULL, skor_teknis TINYINT UNSIGNED NOT NULL,
+  kebutuhan_pelatihan VARCHAR(60) NOT NULL, PRIMARY KEY(id), KEY idx_target(kebutuhan_pelatihan)
+) ENGINE=InnoDB;
+
+INSERT INTO dataset_pelatihan (kode,usia,pendidikan,pengalaman_kerja,bidang_minat,skor_komputer,skor_komunikasi,skor_teknis,kebutuhan_pelatihan) VALUES
+('PK001',20,'SMA/SMK','Belum ada','Administrasi',40,75,65,'Komputer Dasar'),
+('PK002',22,'S1','1-3 tahun','Teknologi Informasi',85,70,45,'Keterampilan Teknis'),
+('PK003',19,'SMA/SMK','Belum ada','Bisnis/Pemasaran',75,40,60,'Komunikasi'),
+('PK004',24,'Diploma','1-3 tahun','Administrasi',82,78,80,'Siap Kerja/Lanjutan'),
+('PK005',21,'SMA/SMK','Belum ada','Desain Kreatif',45,65,70,'Komputer Dasar'),
+('PK006',25,'S1','Lebih dari 3 tahun','Teknik/Operasional',75,80,42,'Keterampilan Teknis'),
+('PK007',20,'SMA/SMK','Belum ada','Bisnis/Pemasaran',65,43,70,'Komunikasi'),
+('PK008',23,'Diploma','Kurang dari 1 tahun','Administrasi',80,75,78,'Siap Kerja/Lanjutan'),
+('PK009',18,'SMA/SMK','Belum ada','Teknologi Informasi',38,60,75,'Komputer Dasar'),
+('PK010',26,'S1','1-3 tahun','Teknik/Operasional',75,72,48,'Keterampilan Teknis'),
+('PK011',22,'Diploma','Belum ada','Bisnis/Pemasaran',70,42,65,'Komunikasi'),
+('PK012',27,'S1','Lebih dari 3 tahun','Administrasi',88,85,82,'Siap Kerja/Lanjutan'),
+('PK013',19,'SMA/SMK','Belum ada','Desain Kreatif',48,72,68,'Komputer Dasar'),
+('PK014',24,'Diploma','1-3 tahun','Teknologi Informasi',78,80,44,'Keterampilan Teknis'),
+('PK015',21,'SMA/SMK','Kurang dari 1 tahun','Bisnis/Pemasaran',68,46,72,'Komunikasi'),
+('PK016',28,'S1','Lebih dari 3 tahun','Administrasi',90,88,85,'Siap Kerja/Lanjutan'),
+('PK017',20,'SMA/SMK','Belum ada','Teknologi Informasi',42,68,75,'Komputer Dasar'),
+('PK018',25,'Diploma','1-3 tahun','Teknik/Operasional',80,75,40,'Keterampilan Teknis'),
+('PK019',22,'SMA/SMK','Belum ada','Bisnis/Pemasaran',70,38,65,'Komunikasi'),
+('PK020',29,'S1','Lebih dari 3 tahun','Desain Kreatif',85,82,88,'Siap Kerja/Lanjutan'),
+('PK021',18,'SMA/SMK','Belum ada','Administrasi',35,65,55,'Komputer Dasar'),
+('PK022',23,'Diploma','Kurang dari 1 tahun','Teknologi Informasi',75,80,43,'Keterampilan Teknis'),
+('PK023',21,'SMA/SMK','Belum ada','Bisnis/Pemasaran',62,42,70,'Komunikasi'),
+('PK024',30,'S1','Lebih dari 3 tahun','Teknik/Operasional',90,85,90,'Siap Kerja/Lanjutan'),
+('PK025',20,'SMA/SMK','Belum ada','Desain Kreatif',44,70,72,'Komputer Dasar'),
+('PK026',26,'Diploma','1-3 tahun','Teknologi Informasi',80,78,45,'Keterampilan Teknis'),
+('PK027',22,'SMA/SMK','Kurang dari 1 tahun','Administrasi',70,45,68,'Komunikasi'),
+('PK028',31,'S1','Lebih dari 3 tahun','Bisnis/Pemasaran',88,90,84,'Siap Kerja/Lanjutan'),
+('PK029',19,'SMA/SMK','Belum ada','Teknologi Informasi',40,65,60,'Komputer Dasar'),
+('PK030',24,'Diploma','1-3 tahun','Teknik/Operasional',78,75,48,'Keterampilan Teknis'),
+('PK031',21,'SMA/SMK','Belum ada','Bisnis/Pemasaran',72,44,60,'Komunikasi'),
+('PK032',28,'S1','Lebih dari 3 tahun','Administrasi',92,86,88,'Siap Kerja/Lanjutan'),
+('PK033',20,'SMA/SMK','Belum ada','Desain Kreatif',46,68,65,'Komputer Dasar'),
+('PK034',25,'Diploma','Kurang dari 1 tahun','Teknologi Informasi',80,72,42,'Keterampilan Teknis'),
+('PK035',22,'SMA/SMK','Belum ada','Bisnis/Pemasaran',65,40,75,'Komunikasi'),
+('PK036',32,'S1','Lebih dari 3 tahun','Teknik/Operasional',85,88,90,'Siap Kerja/Lanjutan'),
+('PK037',19,'SMA/SMK','Belum ada','Administrasi',42,70,68,'Komputer Dasar'),
+('PK038',27,'Diploma','1-3 tahun','Teknik/Operasional',75,80,46,'Keterampilan Teknis'),
+('PK039',23,'SMA/SMK','Kurang dari 1 tahun','Bisnis/Pemasaran',68,43,72,'Komunikasi'),
+('PK040',29,'S1','Lebih dari 3 tahun','Teknologi Informasi',90,88,85,'Siap Kerja/Lanjutan'),
+('PK041',20,'SMA/SMK','Belum ada','Desain Kreatif',48,65,70,'Komputer Dasar'),
+('PK042',26,'Diploma','1-3 tahun','Teknik/Operasional',82,78,44,'Keterampilan Teknis'),
+('PK043',21,'SMA/SMK','Belum ada','Administrasi',75,42,68,'Komunikasi'),
+('PK044',33,'S1','Lebih dari 3 tahun','Bisnis/Pemasaran',88,90,87,'Siap Kerja/Lanjutan'),
+('PK045',18,'SMA/SMK','Belum ada','Teknologi Informasi',39,72,65,'Komputer Dasar'),
+('PK046',24,'Diploma','Kurang dari 1 tahun','Teknik/Operasional',78,80,45,'Keterampilan Teknis'),
+('PK047',22,'SMA/SMK','Belum ada','Bisnis/Pemasaran',65,39,70,'Komunikasi'),
+('PK048',30,'S1','Lebih dari 3 tahun','Administrasi',92,89,91,'Siap Kerja/Lanjutan'),
+('PK049',19,'SMA/SMK','Belum ada','Desain Kreatif',43,75,66,'Komputer Dasar'),
+('PK050',27,'Diploma','1-3 tahun','Teknologi Informasi',85,78,43,'Keterampilan Teknis'),
+('PK051',21,'SMA/SMK','Kurang dari 1 tahun','Bisnis/Pemasaran',70,44,68,'Komunikasi'),
+('PK052',32,'S1','Lebih dari 3 tahun','Teknik/Operasional',90,86,89,'Siap Kerja/Lanjutan'),
+('PK053',20,'SMA/SMK','Belum ada','Administrasi',45,70,62,'Komputer Dasar'),
+('PK054',25,'Diploma','1-3 tahun','Teknologi Informasi',78,75,40,'Keterampilan Teknis'),
+('PK055',23,'SMA/SMK','Belum ada','Bisnis/Pemasaran',68,42,75,'Komunikasi'),
+('PK056',28,'S1','Lebih dari 3 tahun','Desain Kreatif',88,90,85,'Siap Kerja/Lanjutan'),
+('PK057',19,'SMA/SMK','Belum ada','Teknologi Informasi',40,66,70,'Komputer Dasar'),
+('PK058',26,'Diploma','Kurang dari 1 tahun','Teknik/Operasional',80,76,45,'Keterampilan Teknis'),
+('PK059',22,'SMA/SMK','Belum ada','Administrasi',70,40,65,'Komunikasi'),
+('PK060',31,'S1','Lebih dari 3 tahun','Bisnis/Pemasaran',90,88,86,'Siap Kerja/Lanjutan');
+
+-- Akun, lowongan, dan riwayat aplikasi tetap diisi melalui aplikasi.
+

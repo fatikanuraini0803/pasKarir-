@@ -1,0 +1,31 @@
+PANDUAN PEMASANGAN PAS KARIR - INTEGRASI FRONTEND + PHP
+
+ISI PERBAIKAN
+- Halaman PHP User, Sub Admin, dan Super Admin memakai kerangka frontend asli: sidebar, topbar, breadcrumb, menu profil, area konten, dan footer.
+- Dashboard User, Sub Admin, dan Super Admin disusun ulang memakai komponen frontend dan angka langsung dari MySQL.
+- Halaman lowongan User memakai kartu lowongan; formulir klasifikasi dan riwayat memakai tata letak frontend.
+- Super Admin mendapat halaman Data Pelatihan berbasis tabel dataset_pelatihan.
+- Sub Admin mendapat halaman Kelola Panduan / Rekomendasi. Halaman ini membuat tabel tambahan panduan_rekomendasi secara aman dengan CREATE TABLE IF NOT EXISTS ketika pertama kali dibuka. Tabel lama tidak dihapus atau diubah.
+- Login PHP yang sudah menggunakan desain frontend dan autentikasi MySQL dipertahankan.
+
+CARA PASANG (XAMPP)
+1. Tutup tab PasKarir yang sedang terbuka.
+2. Buka C:\xampp\htdocs\Paskarir dan buat salinan cadangan folder tersebut terlebih dahulu.
+3. Ekstrak ZIP ini. Di dalamnya ada folder Paskarir.
+4. Dari hasil ekstrak, salin folder Paskarir\backend\php ke C:\xampp\htdocs\Paskarir\backend\php. Pilih Merge/Gabung dan Replace/Ganti jika Windows bertanya.
+5. Folder frontend tetap harus berada di C:\xampp\htdocs\Paskarir\frontend. Jika folder frontend lama hilang atau berbeda, salin juga folder frontend dari ZIP ini.
+6. Buka XAMPP dan pastikan Apache serta MySQL berjalan.
+7. Jangan mengimpor backend\php\database.sql. File tersebut berisi perintah DROP TABLE dan dapat menghapus tabel serta akun lama. Database paskarir_exam yang sekarang harus tetap digunakan.
+8. Buka: http://localhost:8080/Paskarir/backend/php/user/login.php
+9. Masuk memakai akun aktif yang sudah ada di database. Jangan membuat ulang database atau menghapus akun lama.
+
+URUTAN TES CEPAT
+- Login sebagai User: cek Dashboard, Klasifikasi, Lowongan, dan Riwayat.
+- Login sebagai Sub Admin: cek Dashboard, Kelola Lowongan, dan Kelola Panduan / Rekomendasi.
+- Login sebagai Super Admin: cek Dashboard, Akun dan Hak Akses, Lowongan dan Persyaratan, Data Pelatihan, dan Pengaturan Model.
+
+CATATAN PENTING
+- Apache berjalan pada port 8080, sehingga URL harus memakai localhost:8080.
+- Database lama tidak perlu dihapus, diekspor ulang, atau diimpor ulang.
+- Jika muncul error, kirim teks error atau satu screenshot halaman yang error saja. Tidak perlu screenshot semua halaman.
+- Seluruh file PHP telah lolos pemeriksaan sintaks (php -l), tetapi koneksi dan tampilan tetap harus diverifikasi di XAMPP lokal.

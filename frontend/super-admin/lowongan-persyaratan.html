@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lowongan dan Persyaratan | Super Admin</title>
+
+    <link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="css/pages.css" rel="stylesheet" />
+    <link href="../assets/icons/icons-admin.css" rel="stylesheet" />
+    <link href="../assets/css/admin-common.css" rel="stylesheet" />
+    <link href="../assets/css/feedback.css" rel="stylesheet" />
+
+    <style>
+        /* Tab Daftar Persyaratan dan Daftar Lowongan */
+        .tab-panel-hidden {
+            display: none !important;
+        }
+
+        /* Modal Detail Persyaratan */
+        .detail-persyaratan-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .detail-persyaratan-modal.is-open {
+            display: flex;
+        }
+
+        .detail-persyaratan-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+        }
+
+        .detail-persyaratan-box {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 520px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .detail-persyaratan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .detail-persyaratan-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #1e293b;
+        }
+
+        .detail-persyaratan-close {
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .detail-persyaratan-content {
+            display: grid;
+            gap: 13px;
+        }
+
+        .detail-persyaratan-item {
+            padding: 13px 15px;
+            background: #f8fafc;
+            border-radius: 9px;
+        }
+
+        .detail-persyaratan-item small {
+            display: block;
+            margin-bottom: 5px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .detail-persyaratan-item strong {
+            display: block;
+            color: #1e293b;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .detail-persyaratan-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .detail-persyaratan-footer button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #fff;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .detail-persyaratan-footer button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+
+<div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <img alt="" class="brand__img" height="40" src="../assets/img/logo.svg" width="40" />
+            <span class="brand__name">Paskarir</span>
+        </div>
+
+        <nav aria-label="Menu utama" class="nav">
+            <ul class="nav__list">
+                <li><a class="nav__link" href="dashboard-super-admin.html"><span aria-hidden="true" class="icon icon--home"></span>Dashboard</a></li>
+                <li><a class="nav__link" href="akun-hak-akses.html"><span aria-hidden="true" class="icon icon--users"></span>Akun dan Hak Akses</a></li>
+                <li><a aria-current="page" class="nav__link" href="lowongan-persyaratan.html"><span aria-hidden="true" class="icon icon--briefcase"></span>Lowongan dan Persyaratan</a></li>
+                <li><a class="nav__link" href="data-pelatihan.html"><span aria-hidden="true" class="icon icon--database"></span>Data Pelatihan</a></li>
+                <li><a class="nav__link" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--target"></span>Pengaturan Model</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar__footer">
+            <a class="logout" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+        </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar__start">
+            <button aria-label="Buka/tutup menu" class="menu-btn" type="button">
+                <span aria-hidden="true" class="icon icon--menu"></span>
+            </button>
+
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol class="breadcrumb__list">
+                    <li class="breadcrumb__item"><a href="dashboard-super-admin.html">Super Admin</a></li>
+                    <li aria-current="page" class="breadcrumb__item">Lowongan dan Persyaratan</li>
+                </ol>
+            </nav>
+        </div>
+
+        <details class="profile-menu">
+            <summary class="profile" aria-label="Menu profil">
+                <span class="profile__info">
+                    <span class="profile__name" style="display:block">Nama Super Admin</span>
+                    <span class="profile__role" style="display:block">Super Admin</span>
+                </span>
+                <span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span>
+                <span aria-hidden="true" class="icon icon--chevron"></span>
+            </summary>
+
+            <div class="profile-menu__list">
+                <div class="profile-menu__head">
+                    <strong>Nama Super Admin</strong>
+                    <small>nama@email.com</small>
+                    <span class="badge badge--info">Super Admin</span>
+                </div>
+                <a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil</a>
+                <a href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span>Tambah Akun</a>
+                <a class="is-danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+            </div>
+        </details>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main" id="main-content">
+        <header class="page-header">
+            <h1>Lowongan dan Persyaratan</h1>
+            <p class="page-header__desc">Persyaratan = kriteria tiap lowongan (keterampilan, pendidikan, pengalaman, sertifikasi) untuk menilai kesesuaian.</p>
+        </header>
+
+        <!-- NAVIGASI TAB -->
+        <div class="toolbar">
+            <nav aria-label="Pilih daftar" class="segmented">
+                <a aria-current="page" class="segmented__item" href="#panelPersyaratan" id="tabPersyaratan">Daftar Persyaratan</a>
+                <a class="segmented__item" href="#panelLowongan" id="tabLowongan">Daftar Lowongan</a>
+            </nav>
+
+            <!-- Kolom pencarian: mencari di tab yang sedang dibuka -->
+            <div class="search">
+                <label class="visually-hidden" for="cari">Cari persyaratan</label>
+                <span aria-hidden="true" class="icon icon--search"></span>
+                <input class="search__input" id="cari" placeholder="Cari persyaratan" type="search" />
+            </div>
+
+            <!-- Toolbar khusus Daftar Persyaratan -->
+            <div class="toolbar__end" id="toolbarPersyaratan">
+                <div>
+                    <label class="visually-hidden" for="filter-bidang">Filter bidang</label>
+                    <select class="select-pill" id="filter-bidang">
+                        <option>Semua bidang</option>
+                        <option>Teknologi Informasi</option>
+                        <option>Administrasi</option>
+                    </select>
+                </div>
+                <a class="btn btn--primary" href="form-persyaratan.html">
+                    <span aria-hidden="true" class="icon icon--plus"></span> Tambah Persyaratan
+                </a>
+            </div>
+        </div>
+
+        <!-- PANEL DAFTAR PERSYARATAN -->
+        <section id="panelPersyaratan">
+            <div class="table-card">
+                <table class="table">
+                    <caption class="visually-hidden">Daftar persyaratan lowongan</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Lowongan</th>
+                            <th scope="col">Keterampilan wajib</th>
+                            <th scope="col">Pend. min</th>
+                            <th scope="col">Peng. min</th>
+                            <th scope="col">Sertifikasi</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend Developer</td>
+                            <td>HTML, CSS, JavaScript</td>
+                            <td>S1</td>
+                            <td>2 th</td>
+                            <td><span class="badge badge--success">Ya</span></td>
+                            <td>
+                                <div class="actions">
+                                    <a aria-label="Lihat Frontend Developer" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                                    <a aria-label="Ubah Frontend Developer" class="icon-btn" href="form-persyaratan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                                    <button aria-label="Hapus Frontend Developer" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Staff Administrasi</td>
+                            <td>Microsoft Office, Komunikasi</td>
+                            <td>D3</td>
+                            <td>1 th</td>
+                            <td><span class="badge badge--danger">Tidak</span></td>
+                            <td>
+                                <div class="actions">
+                                    <a aria-label="Lihat Staff Administrasi" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                                    <a aria-label="Ubah Staff Administrasi" class="icon-btn" href="form-persyaratan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                                    <button aria-label="Hapus Staff Administrasi" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data Analyst</td>
+                            <td>SQL, Excel, Analisis Data</td>
+                            <td>S1</td>
+                            <td>0 th</td>
+                            <td><span class="badge badge--danger">Tidak</span></td>
+                            <td>
+                                <div class="actions">
+                                    <a aria-label="Lihat Data Analyst" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                                    <a aria-label="Ubah Data Analyst" class="icon-btn" href="form-persyaratan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                                    <button aria-label="Hapus Data Analyst" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>UI/UX Designer</td>
+                            <td>Figma, Desain Antarmuka</td>
+                            <td>S1</td>
+                            <td>3 th</td>
+                            <td><span class="badge badge--success">Ya</span></td>
+                            <td>
+                                <div class="actions">
+                                    <a aria-label="Lihat UI/UX Designer" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                                    <a aria-label="Ubah UI/UX Designer" class="icon-btn" href="form-persyaratan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                                    <button aria-label="Hapus UI/UX Designer" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Network Engineer</td>
+                            <td>Jaringan Komputer, Linux</td>
+                            <td>D3</td>
+                            <td>1 th</td>
+                            <td><span class="badge badge--danger">Tidak</span></td>
+                            <td>
+                                <div class="actions">
+                                    <a aria-label="Lihat Network Engineer" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                                    <a aria-label="Ubah Network Engineer" class="icon-btn" href="form-persyaratan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                                    <button aria-label="Hapus Network Engineer" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Staff Keuangan</td>
+                            <td>Akuntansi, Microsoft Excel</td>
+                            <td>S1</td>
+                            <td>2 th</td>
+                            <td><span class="badge badge--success">Ya</span></td>
+                            <td>
+                                <div class="actions">
+                                    <a aria-label="Lihat Staff Keuangan" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                                    <a aria-label="Ubah Staff Keuangan" class="icon-btn" href="form-persyaratan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                                    <button aria-label="Hapus Staff Keuangan" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <p id="infoPersyaratan">Menampilkan 1-6 dari 6 persyaratan</p>
+                <nav aria-label="Halaman persyaratan" class="pagination" id="pagePersyaratan">
+                    <a class="page-btn" href="#">Sebelumnya</a>
+                    <a aria-current="page" class="page-btn" href="#">1</a>
+                    <a class="page-btn" href="#">2</a>
+                    <a class="page-btn" href="#">Next</a>
+                </nav>
+            </div>
+
+            <aside class="note">
+                <p>Persyaratan = kriteria minimal tiap lowongan (keterampilan, pendidikan, pengalaman, sertifikasi) yang dibandingkan dengan data user.</p>
+            </aside>
+        </section>
+
+        <!-- PANEL DAFTAR LOWONGAN: DATA DUMMY -->
+        <section id="panelLowongan" class="tab-panel-hidden">
+            <div class="table-card">
+                <table class="table">
+                    <caption class="visually-hidden">Daftar lowongan pekerjaan</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama Lowongan</th>
+                            <th scope="col">Perusahaan</th>
+                            <th scope="col">Bidang</th>
+                            <th scope="col">Lokasi</th>
+                            <th scope="col">Batas Lamaran</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend Developer</td>
+                            <td>PT Digital Nusantara</td>
+                            <td>Teknologi Informasi</td>
+                            <td>Ternate</td>
+                            <td>30 November 2026</td>
+                            <td><span class="badge badge--success">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td>Staff Administrasi</td>
+                            <td>PT Halmahera Sejahtera</td>
+                            <td>Administrasi</td>
+                            <td>Weda</td>
+                            <td>25 November 2026</td>
+                            <td><span class="badge badge--success">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td>Data Analyst</td>
+                            <td>CV Data Cerdas</td>
+                            <td>Teknologi Informasi</td>
+                            <td>Ternate</td>
+                            <td>20 November 2026</td>
+                            <td><span class="badge badge--success">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td>UI/UX Designer</td>
+                            <td>PT Kreasi Digital</td>
+                            <td>Desain</td>
+                            <td>Remote</td>
+                            <td>10 Desember 2026</td>
+                            <td><span class="badge badge--success">Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Service</td>
+                            <td>PT Layanan Prima</td>
+                            <td>Pelayanan</td>
+                            <td>Tidore</td>
+                            <td>10 November 2026</td>
+                            <td><span class="badge badge--danger">Ditutup</span></td>
+                        </tr>
+                        <tr>
+                            <td>Staff Keuangan</td>
+                            <td>PT Maju Bersama</td>
+                            <td>Keuangan</td>
+                            <td>Sofifi</td>
+                            <td>12 November 2026</td>
+                            <td><span class="badge badge--danger">Ditutup</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <p id="infoLowongan">Menampilkan 1-6 dari 6 lowongan</p>
+                <nav aria-label="Halaman lowongan" class="pagination" id="pageLowongan"></nav>
+            </div>
+
+            <aside class="note">
+                <p>Data lowongan yang ditampilkan saat ini merupakan data dummy untuk kebutuhan pengujian tampilan halaman Super Admin.</p>
+            </aside>
+        </section>
+    </main>
+</div>
+
+<!-- MODAL KELUAR -->
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal" id="keluar" role="dialog">
+    <a aria-label="Batal" class="modal__backdrop" href="#"></a>
+    <div class="dialog">
+        <span aria-hidden="true" class="dialog__icon"><span class="icon icon--logout"></span></span>
+        <div>
+            <h2 class="text-h3" id="keluar-judul">Keluar dari akun?</h2>
+            <p class="dialog__desc">Kamu perlu masuk lagi untuk mengakses panel admin.</p>
+            <div class="dialog__actions">
+                <a class="btn btn--outline" href="#">Batal</a>
+                <a class="btn btn--primary" href="../admin-menu.html">Ya, Keluar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DETAIL PERSYARATAN -->
+<div class="detail-persyaratan-modal" id="detailPersyaratanModal" aria-hidden="true">
+    <div class="detail-persyaratan-backdrop" data-tutup-detail></div>
+
+    <div class="detail-persyaratan-box" role="dialog" aria-modal="true" aria-labelledby="judulDetailPersyaratan">
+        <div class="detail-persyaratan-header">
+            <h2 id="judulDetailPersyaratan">Detail Persyaratan</h2>
+            <button type="button" class="detail-persyaratan-close" data-tutup-detail aria-label="Tutup">&times;</button>
+        </div>
+
+        <div class="detail-persyaratan-content" id="isiDetailPersyaratan"></div>
+
+        <div class="detail-persyaratan-footer">
+            <button type="button" data-tutup-detail>Tutup</button>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT BAWAAN PROYEK -->
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+<script src="../../backend/js/shared/admin-menu.js" defer></script>
+<script src="../../backend/js/shared/table-tools.js"></script>
+
+<!-- SCRIPT TAB DAN IKON LIHAT -->
+<script>
+(function () {
+    'use strict';
+
+    // Ambil elemen tab dan panel
+    const tabPersyaratan = document.getElementById('tabPersyaratan');
+    const tabLowongan = document.getElementById('tabLowongan');
+    const panelPersyaratan = document.getElementById('panelPersyaratan');
+    const panelLowongan = document.getElementById('panelLowongan');
+    const toolbarPersyaratan = document.getElementById('toolbarPersyaratan');
+
+    // Ambil elemen modal detail persyaratan
+    const modalDetail = document.getElementById('detailPersyaratanModal');
+    const isiDetail = document.getElementById('isiDetailPersyaratan');
+
+    // Pastikan elemen utama tersedia
+    if (!tabPersyaratan || !tabLowongan || !panelPersyaratan || !panelLowongan || !toolbarPersyaratan) {
+        console.error('Elemen tab atau panel tidak ditemukan. Periksa ID pada HTML.');
+        return;
+    }
+
+    // Fungsi untuk berpindah tab
+    function tampilkanTab(pilihan) {
+        const persyaratanAktif = pilihan === 'persyaratan';
+
+        panelPersyaratan.classList.toggle('tab-panel-hidden', !persyaratanAktif);
+        panelLowongan.classList.toggle('tab-panel-hidden', persyaratanAktif);
+        toolbarPersyaratan.classList.toggle('tab-panel-hidden', !persyaratanAktif);
+
+        if (persyaratanAktif) {
+            tabPersyaratan.setAttribute('aria-current', 'page');
+            tabLowongan.removeAttribute('aria-current');
+        } else {
+            tabLowongan.setAttribute('aria-current', 'page');
+            tabPersyaratan.removeAttribute('aria-current');
+        }
+    }
+
+    tabPersyaratan.addEventListener('click', function (event) {
+        event.preventDefault();
+        tampilkanTab('persyaratan');
+    });
+
+    tabLowongan.addEventListener('click', function (event) {
+        event.preventDefault();
+        tampilkanTab('lowongan');
+    });
+
+    // Menangani klik ikon Lihat pada tabel persyaratan
+    panelPersyaratan.addEventListener('click', function (event) {
+        const tombolLihat = event.target.closest('a[title="Lihat"]');
+
+        if (!tombolLihat) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const baris = tombolLihat.closest('tr');
+        if (!baris || !modalDetail || !isiDetail) {
+            console.error('Baris tabel atau modal detail tidak ditemukan.');
+            return;
+        }
+
+        const kolom = baris.querySelectorAll('td');
+        const dataDetail = [
+            ['Nama Lowongan', kolom[0] ? kolom[0].textContent.trim() : '-'],
+            ['Keterampilan Wajib', kolom[1] ? kolom[1].textContent.trim() : '-'],
+            ['Pendidikan Minimal', kolom[2] ? kolom[2].textContent.trim() : '-'],
+            ['Pengalaman Minimal', kolom[3] ? kolom[3].textContent.trim() : '-'],
+            ['Sertifikasi', kolom[4] ? kolom[4].textContent.trim() : '-']
+        ];
+
+        // Bersihkan isi modal sebelumnya
+        isiDetail.replaceChildren();
+
+        // Tampilkan data dari baris yang diklik
+        dataDetail.forEach(function (data) {
+            const item = document.createElement('div');
+            item.className = 'detail-persyaratan-item';
+
+            const label = document.createElement('small');
+            label.textContent = data[0];
+
+            const nilai = document.createElement('strong');
+            nilai.textContent = data[1] || '-';
+
+            item.appendChild(label);
+            item.appendChild(nilai);
+            isiDetail.appendChild(item);
+        });
+
+        modalDetail.classList.add('is-open');
+        modalDetail.setAttribute('aria-hidden', 'false');
+    });
+
+    // Fungsi menutup modal detail
+    function tutupModalDetail() {
+        if (!modalDetail) return;
+        modalDetail.classList.remove('is-open');
+        modalDetail.setAttribute('aria-hidden', 'true');
+    }
+
+    if (modalDetail) {
+        modalDetail.querySelectorAll('[data-tutup-detail]').forEach(function (tombol) {
+            tombol.addEventListener('click', tutupModalDetail);
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modalDetail.classList.contains('is-open')) {
+                tutupModalDetail();
+            }
+        });
+    }
+
+    // ---- Pencarian dan pagination untuk kedua tabel ----
+    const kolomCari = document.getElementById('cari');
+    const tabelPersyaratan = Paskarir.TableTools.init({
+        table: panelPersyaratan.querySelector('.table'),
+        pagination: document.getElementById('pagePersyaratan'),
+        info: document.getElementById('infoPersyaratan'),
+        pageSize: 4,
+        noun: 'persyaratan'
+    });
+    const tabelLowongan = Paskarir.TableTools.init({
+        table: panelLowongan.querySelector('.table'),
+        pagination: document.getElementById('pageLowongan'),
+        info: document.getElementById('infoLowongan'),
+        pageSize: 4,
+        noun: 'lowongan'
+    });
+
+    function tabelAktif() {
+        return panelPersyaratan.classList.contains('tab-panel-hidden') ? tabelLowongan : tabelPersyaratan;
+    }
+
+    // Kolom cari dipakai bersama; kata kunci diterapkan ke tab yang sedang terbuka
+    if (kolomCari) {
+        const terapkan = function () { tabelAktif().setQuery(kolomCari.value); };
+        kolomCari.addEventListener('input', terapkan);
+        kolomCari.addEventListener('search', terapkan);
+        kolomCari.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') event.preventDefault();
+        });
+    }
+
+    // Saat pindah tab: ganti teks petunjuk dan kosongkan pencarian di kedua tabel
+    function resetPencarian(persyaratanAktif) {
+        if (!kolomCari) return;
+        kolomCari.value = '';
+        kolomCari.placeholder = persyaratanAktif ? 'Cari persyaratan' : 'Cari lowongan';
+        const label = document.querySelector('label[for="cari"]');
+        if (label) label.textContent = kolomCari.placeholder;
+        tabelPersyaratan.setQuery('');
+        tabelLowongan.setQuery('');
+    }
+    tabPersyaratan.addEventListener('click', function () { resetPencarian(true); });
+    tabLowongan.addEventListener('click', function () { resetPencarian(false); });
+
+    // Tampilan awal saat halaman dibuka
+    tampilkanTab('persyaratan');
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+PERBAIKAN FINAL ALAMAT CSS, GAMBAR, DAN HALAMAN LOGIN PASKARIR
+
+Penyebab:
+Aplikasi PHP memakai alamat dasar /Paskarir/backend/php. Versi sebelumnya menautkan aset frontend dan beberapa halaman seolah-olah alamat dasarnya /Paskarir. Akibatnya CSS/gambar tidak ditemukan dan halaman login tampak seperti HTML polos.
+
+Pemasangan:
+1. Tutup tab PasKarir yang sedang terbuka.
+2. Ekstrak ZIP ini.
+3. Buka folder Paskarir hasil ekstrak.
+4. Salin folder backend ke C:\xampp\htdocs\Paskarir\backend.
+5. Pilih gabungkan folder dan ganti file yang diminta.
+6. Jangan hapus atau ganti folder frontend.
+7. Jangan impor database.sql. Database paskarir_exam yang sekarang tetap digunakan.
+8. Buka ulang: http://localhost:8080/Paskarir/backend/php/user/login.php
+9. Jika browser masih menampilkan tampilan lama, tekan Ctrl+F5.
+
+Perubahan pada paket ini hanya memperbaiki alamat aset dan tautan halaman di backend/php/shared/header.php serta backend/php/user/login.php. Tidak ada perintah DROP/TRUNCATE tabel dan tidak ada perubahan data akun.

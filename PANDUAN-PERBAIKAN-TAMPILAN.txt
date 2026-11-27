@@ -1,0 +1,51 @@
+PERBAIKAN KESESUAIAN TAMPILAN PHP DENGAN FRONTEND
+
+Masalah:
+- assets/frontend-php-bridge.css menimpa gaya asli frontend (.card, .btn, .badge, table, label, input, .stat)
+  sehingga tampilan PHP berbeda dari desain di folder frontend.
+- Halaman admin (lowongan, form, akun, profil, data pelatihan, pengaturan model) memakai markup generik
+  (class field, filters, table-wrap) yang tidak ada di CSS frontend.
+- Beberapa bug: tombol hapus berjudul "Hapus" dicegat JS frontend (baris hilang tanpa terhapus di database),
+  stat "Lowongan aktif" di dashboard User tercetak teks path (variabel $aktif tertimpa header.php),
+  filter role di Akun dan Hak Akses tidak terpilih ($role tertimpa header.php), menu sidebar admin ganda.
+
+File yang diubah (semua di backend/php/):
+- assets/frontend-php-bridge.css (dirombak: tidak lagi menimpa gaya frontend)
+- shared/header.php (menu ganda dihapus, ikon Pengaturan Model)
+- shared/halaman/: lowongan_list, lowongan_form, profil, ubah_password, dashboard_admin
+- super-admin/: akun, akun_form, data-pelatihan, model-decision-tree
+- sub-admin/panduan.php
+- user/: dashboard, hasil, riwayat, daftar, klasifikasi-pelatihan
+
+Pemasangan: salin folder backend\php ke C:\xampp\htdocs\Paskarir\backend\php (Gabung/Ganti), lalu Ctrl+F5.
+Jangan impor database.sql. Logika PHP, query, validasi, dan CSRF tidak diubah; hanya tampilan (markup).
+Catatan: file ini belum dijalankan di PHP/XAMPP oleh pembuat perbaikan, jadi cek tiap halaman setelah dipasang.
+- Input keterampilan (Klasifikasi dan form Lowongan) kini berupa chip: backend/js/shared/chips-php.js (baru), user/klasifikasi.php, shared/halaman/lowongan_form.php.
+
+TAMBAHAN (pagination, skala persen, ikon)
+- Pagination: semua tabel (Kelola Lowongan, Akun dan Hak Akses, Data Pelatihan, Kelola Panduan,
+  tabel di Dashboard, Riwayat User) punya tombol Sebelumnya, nomor halaman, dan Next yang berfungsi.
+  Tombol yang tidak berlaku tampil redup. Pencarian/filter tetap terbawa saat pindah halaman.
+  Jumlah baris per halaman diatur di backend/php/shared/helpers.php: const PER_HALAMAN = 10;
+- Skala kesesuaian: bar persen Sesuai vs Tidak Sesuai di Dashboard User, Riwayat User,
+  Dashboard Sub Admin, dan Dashboard Super Admin. Riwayat User juga punya kolom Kecocokan (%).
+- Ikon: ikon mata (lihat) kini ada di Kelola Panduan dan tabel Dashboard Sub Admin (dialog detail:
+  backend/js/shared/detail-modal.js). Ikon chevron kiri/kanan, close, mail, book, doc ditambahkan.
+- CSS: toolbar dan tabel tidak lagi terpotong di layar sempit/zoom besar.
+
+REVISI (pagination dan evaluasi model)
+- Pagination kini hanya dua tombol: Sebelumnya dan Next (tanpa nomor halaman), 10 baris per halaman.
+  Info "Halaman X dari Y" tampil di sebelah kiri.
+- Pengaturan Model: bagian evaluasi memakai confusion matrix Sesuai / Tidak Sesuai dan rumus
+  Accuracy = (TP + TN) / Total x 100%. Kelas "Siap Kerja/Lanjutan" dihitung Sesuai, kelas lain Tidak Sesuai
+  (diatur di const DT_LABEL_SESUAI pada backend/php/shared/decision_tree.php).
+  Angka akurasi di Dashboard Super Admin ikut memakai perhitungan yang sama.
+
+REVISI 2 (pagination 1-2 dan ikon) - menggantikan catatan pagination sebelumnya
+- Pagination: [Sebelumnya] [1] [2] [Next]. Halaman aktif berwarna biru. Jumlah halaman selalu maksimal 2,
+  jadi makin banyak data, tabel makin panjang (baris per halaman = setengah dari total, minimal 5).
+  Minimal baris diatur di backend/php/shared/helpers.php: const PER_HALAMAN = 5;
+- Klik tombol hanya mengganti isi tabel di tempat (backend/js/shared/pager.js), tanpa pindah halaman,
+  lalu tampilan diarahkan ke tabel. Bila JS gagal, tombol tetap berfungsi sebagai tautan biasa.
+- Ikon: panah di tombol Sebelumnya/Next, ikon hapus nonaktif untuk akun yang sedang dipakai,
+  dan ikon di tombol Batal, Simpan, Tutup, Lihat, Detail, Cek Kesesuaian, Ubah Akun, Reset, Cari, Ya Keluar.

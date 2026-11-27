@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <title>Kelola Panduan / Rekomendasi | Panel Admin</title>
+
+  <link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <link href="css/pages.css" rel="stylesheet"/>
+  <link href="../assets/icons/icons-admin.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/admin-common.css"/>
+  <link href="../assets/css/feedback.css" rel="stylesheet"/>
+
+  <!-- CSS panel edit -->
+  <style>
+    #panelEditPanduan[hidden] {
+      display: none !important;
+    }
+
+    #panelEditPanduan:not([hidden]) {
+      display: block;
+      animation: panelEditMasuk .25s ease;
+    }
+
+    @keyframes panelEditMasuk {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Penanda baris yang sedang diedit */
+    .table tbody tr.is-editing {
+      background: #e8efff;
+    }
+  </style>
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <img
+        alt=""
+        class="brand__img"
+        height="40"
+        src="../assets/img/logo.svg"
+        width="40"
+      />
+      <span class="brand__name">Paskarir</span>
+    </div>
+
+    <nav aria-label="Menu utama" class="nav">
+      <ul class="nav__list">
+
+        <li>
+          <a class="nav__link" href="dashboard-sub-admin.html">
+            <span aria-hidden="true" class="icon icon--home"></span>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a class="nav__link" href="kelola-lowongan.html">
+            <span aria-hidden="true" class="icon icon--briefcase"></span>
+            Kelola Lowongan
+          </a>
+        </li>
+
+        <li>
+          <a
+            aria-current="page"
+            class="nav__link"
+            href="kelola-panduan.html"
+          >
+            <span aria-hidden="true" class="icon icon--document"></span>
+            Kelola Panduan / Rekomendasi
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="sidebar__footer">
+      <a class="logout" href="#keluar">
+        <span aria-hidden="true" class="icon icon--logout"></span>
+        Keluar
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+
+    <div class="topbar__start">
+
+      <button
+        aria-label="Buka/tutup menu"
+        class="menu-btn"
+        type="button"
+      >
+        <span aria-hidden="true" class="icon icon--menu"></span>
+      </button>
+
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item">
+            <a href="dashboard-sub-admin.html">Panel Admin</a>
+          </li>
+
+          <li aria-current="page" class="breadcrumb__item">
+            Kelola Panduan / Rekomendasi
+          </li>
+        </ol>
+      </nav>
+
+    </div>
+
+    <details class="profile-menu">
+
+      <summary class="profile" aria-label="Menu profil">
+
+        <span class="profile__info">
+          <span class="profile__name" style="display:block">
+            Nama Admin
+          </span>
+
+          <span class="profile__role" style="display:block">
+            Sub Admin
+          </span>
+        </span>
+
+        <span class="avatar">
+          <span aria-hidden="true" class="icon icon--user"></span>
+        </span>
+
+        <span aria-hidden="true" class="icon icon--chevron"></span>
+
+      </summary>
+
+      <div class="profile-menu__list">
+
+        <div class="profile-menu__head">
+          <strong>Nama Admin</strong>
+          <small>nama@email.com</small>
+          <span class="badge badge--info">Sub Admin</span>
+        </div>
+
+        <a href="profil.html">
+          <span aria-hidden="true" class="icon icon--user"></span>
+          Profil
+        </a>
+
+        <a class="is-danger" href="#keluar">
+          <span aria-hidden="true" class="icon icon--logout"></span>
+          Keluar
+        </a>
+
+      </div>
+    </details>
+
+  </header>
+
+  <!-- KONTEN UTAMA -->
+  <main class="main" id="main-content">
+
+    <header class="page-header">
+      <h1>Kelola Panduan / Rekomendasi</h1>
+
+      <p class="page-header__desc">
+        Atur panduan penggunaan dan aturan rekomendasi lowongan
+        yang tampil ke user.
+      </p>
+    </header>
+
+    <div class="layout-split layout-split--guide">
+
+      <!-- BAGIAN TABEL -->
+      <div class="stack">
+
+        <!-- PENCARIAN -->
+        <div class="search">
+          <label class="visually-hidden" for="cari">
+            Cari panduan
+          </label>
+
+          <span aria-hidden="true" class="icon icon--search"></span>
+
+          <input
+            class="search__input"
+            id="cari"
+            placeholder="Cari panduan"
+            type="search"
+          />
+        </div>
+
+        <!-- TABEL PANDUAN -->
+        <div class="table-card">
+
+          <table class="table">
+
+            <caption class="visually-hidden">
+              Daftar panduan dan rekomendasi
+            </caption>
+
+            <thead>
+              <tr>
+                <th scope="col">Judul</th>
+                <th scope="col">Jenis</th>
+                <th scope="col">Status</th>
+                <th scope="col">Aksi</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- DATA 1 -->
+              <tr
+                data-isi="Panduan menjelaskan cara mengisi formulir pendaftaran dengan benar."
+                data-tampilkan="true"
+              >
+                <td>Cara mengisi form</td>
+                <td>Panduan</td>
+
+                <td>
+                  <span class="badge badge--success">Aktif</span>
+                </td>
+
+                <td>
+                  <div class="actions">
+
+                    <a
+                      aria-label="Lihat Cara mengisi form"
+                      class="icon-btn"
+                      href="#"
+                      title="Lihat"
+                    >
+                      <span aria-hidden="true" class="icon icon--eye"></span>
+                    </a>
+
+                    <button
+                      aria-label="Ubah Cara mengisi form"
+                      class="icon-btn"
+                      type="button"
+                      title="Ubah"
+                      data-action="edit">
+                      <span aria-hidden="true" class="icon icon--edit"></span>
+                    </button>
+
+                    <button
+                      aria-label="Hapus Cara mengisi form"
+                      class="icon-btn"
+                      title="Hapus"
+                      type="button"
+                    >
+                      <span aria-hidden="true" class="icon icon--trash"></span>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- DATA 2 -->
+              <tr
+                data-isi="Panduan untuk memahami hasil klasifikasi dan informasi yang ditampilkan."
+                data-tampilkan="true"
+              >
+                <td>Membaca hasil</td>
+                <td>Panduan</td>
+
+                <td>
+                  <span class="badge badge--success">Aktif</span>
+                </td>
+
+                <td>
+                  <div class="actions">
+
+                    <a
+                      aria-label="Lihat Membaca hasil"
+                      class="icon-btn"
+                      href="#"
+                      title="Lihat"
+                    >
+                      <span aria-hidden="true" class="icon icon--eye"></span>
+                    </a>
+
+                    <a
+                      aria-label="Ubah Membaca hasil"
+                      class="icon-btn"
+                      href="#"
+                      title="Ubah"
+                    >
+                      <span aria-hidden="true" class="icon icon--edit"></span>
+                    </a>
+
+                    <button
+                      aria-label="Hapus Membaca hasil"
+                      class="icon-btn"
+                      title="Hapus"
+                      type="button"
+                    >
+                      <span aria-hidden="true" class="icon icon--trash"></span>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- DATA 3 -->
+              <tr
+                data-isi="Aturan rekomendasi untuk menentukan urutan lowongan yang disarankan."
+                data-tampilkan="false"
+              >
+                <td>Aturan rekomendasi A</td>
+                <td>Rekomendasi</td>
+
+                <td>
+                  <span class="badge badge--warning">Draft</span>
+                </td>
+
+                <td>
+                  <div class="actions">
+
+                    <a
+                      aria-label="Lihat Aturan rekomendasi A"
+                      class="icon-btn"
+                      href="#"
+                      title="Lihat"
+                    >
+                      <span aria-hidden="true" class="icon icon--eye"></span>
+                    </a>
+
+                    <a
+                      aria-label="Ubah Aturan rekomendasi A"
+                      class="icon-btn"
+                      href="#"
+                      title="Ubah"
+                    >
+                      <span aria-hidden="true" class="icon icon--edit"></span>
+                    </a>
+
+                    <button
+                      aria-label="Hapus Aturan rekomendasi A"
+                      class="icon-btn"
+                      title="Hapus"
+                      type="button"
+                    >
+                      <span aria-hidden="true" class="icon icon--trash"></span>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+              <!-- DATA 4 -->
+              <tr
+                data-isi="Aturan rekomendasi untuk memberikan saran lowongan lain kepada pengguna."
+                data-tampilkan="true"
+              >
+                <td>Aturan rekomendasi B</td>
+                <td>Rekomendasi</td>
+
+                <td>
+                  <span class="badge badge--success">Aktif</span>
+                </td>
+
+                <td>
+                  <div class="actions">
+
+                    <a
+                      aria-label="Lihat Aturan rekomendasi B"
+                      class="icon-btn"
+                      href="#"
+                      title="Lihat"
+                    >
+                      <span aria-hidden="true" class="icon icon--eye"></span>
+                    </a>
+
+                    <a
+                      aria-label="Ubah Aturan rekomendasi B"
+                      class="icon-btn"
+                      href="#"
+                      title="Ubah"
+                    >
+                      <span aria-hidden="true" class="icon icon--edit"></span>
+                    </a>
+
+                    <button
+                      aria-label="Hapus Aturan rekomendasi B"
+                      class="icon-btn"
+                      title="Hapus"
+                      type="button"
+                    >
+                      <span aria-hidden="true" class="icon icon--trash"></span>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- CATATAN -->
+        <aside
+          aria-labelledby="judul-catatan"
+          class="card card--muted note-card"
+        >
+          <h2 class="text-h3" id="judul-catatan">Catatan</h2>
+
+          <p class="info-card__text">
+            Panduan tampil di Landing dan halaman user.
+            Aturan rekomendasi menentukan urutan lowongan lain
+            yang disarankan setelah hasil klasifikasi.
+          </p>
+        </aside>
+
+      </div>
+
+      <!-- PANEL EDIT -->
+      <!-- Tersembunyi saat halaman pertama kali dibuka -->
+      <section
+        aria-labelledby="judul-edit"
+        class="card"
+        id="panelEditPanduan"
+        hidden
+      >
+
+        <h2 id="judul-edit">Edit panduan / rekomendasi</h2>
+
+        <form
+          action="#"
+          class="stack"
+          id="formPanduan"
+          method="post"
+        >
+
+          <!-- JUDUL -->
+          <div class="form-group">
+
+            <label class="label" for="judulPanduan">
+              Judul
+            </label>
+
+            <div class="control">
+              <span
+                aria-hidden="true"
+                class="icon icon--document"
+              ></span>
+
+              <input
+                class="input"
+                id="judulPanduan"
+                name="judul"
+                placeholder="Masukkan judul panduan"
+                type="text"
+                required
+              />
+            </div>
+
+          </div>
+
+          <!-- JENIS -->
+          <div class="form-group">
+
+            <label class="label" for="jenisPanduan">
+              Jenis
+            </label>
+
+            <div class="control">
+              <span
+                aria-hidden="true"
+                class="icon icon--briefcase"
+              ></span>
+
+              <select
+                class="select"
+                id="jenisPanduan"
+                name="jenis"
+                required
+              >
+                <option value="Panduan">Panduan</option>
+                <option value="Rekomendasi">Rekomendasi</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- ISI -->
+          <div class="form-group">
+
+            <label class="label" for="isiPanduan">
+              Isi
+            </label>
+
+            <textarea
+              class="textarea textarea--lg"
+              id="isiPanduan"
+              name="isi"
+              placeholder="Tulis isi panduan di sini..."
+              required
+            ></textarea>
+
+          </div>
+
+          <!-- STATUS TAMPIL KE USER -->
+          <div class="switch-row">
+
+            <span class="label" id="label-tampil">
+              Tampilkan ke user
+            </span>
+
+            <label class="switch">
+
+              <input
+                aria-labelledby="label-tampil"
+                checked
+                class="switch__input"
+                id="tampilkanKeUser"
+                name="tampilkan"
+                role="switch"
+                type="checkbox"
+              />
+
+              <span class="switch__track"></span>
+
+            </label>
+
+          </div>
+
+          <!-- TOMBOL FORM -->
+          <div class="form-actions">
+
+            <button
+              class="btn btn--primary"
+              type="submit"
+            >
+              <span
+                aria-hidden="true"
+                class="icon icon--check"
+              ></span>
+              Simpan
+            </button>
+
+            <button
+              class="btn btn--outline"
+              id="btnBatalEditPanduan"
+              type="button"
+            >
+              Batal
+            </button>
+
+          </div>
+
+        </form>
+
+      </section>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL KELUAR -->
+<div
+  aria-labelledby="keluar-judul"
+  aria-modal="true"
+  class="modal"
+  id="keluar"
+  role="dialog"
+>
+  <a aria-label="Batal" class="modal__backdrop" href="#"></a>
+
+  <div class="dialog">
+
+    <span aria-hidden="true" class="dialog__icon">
+      <span class="icon icon--logout"></span>
+    </span>
+
+    <div>
+      <h2 class="text-h3" id="keluar-judul">
+        Keluar dari akun?
+      </h2>
+
+      <p class="dialog__desc">
+        Kamu perlu masuk lagi untuk mengakses panel admin.
+      </p>
+
+      <div class="dialog__actions">
+        <a class="btn btn--outline" href="#">Batal</a>
+        <a class="btn btn--primary" href="../admin-menu.html">
+          Ya, Keluar
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+<script src="../../backend/js/sub-admin/kelola-panduan.js"></script>
+<script src="../../backend/js/shared/admin-menu.js"></script>
+<script src="../../backend/js/shared/panduan-view.js"></script>
+<script src="../../backend/js/shared/panduan-edit.js"></script>
+<script src="../../backend/js/shared/table-tools.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  Paskarir.TableTools.init({
+    table: document.querySelector('.table'),
+    search: document.getElementById('cari'),
+    pageSize: 1000,
+    noun: 'panduan'
+  });
+});
+</script>
+
+</body>
+</html>

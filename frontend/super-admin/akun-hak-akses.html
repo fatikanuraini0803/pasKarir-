@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Akun dan Hak Akses | Super Admin</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/admin-common.css">
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body><a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+<div class="brand">
+<img alt="" class="brand__img" height="40" src="../assets/img/logo.svg" width="40"/>
+<span class="brand__name">Paskarir</span>
+</div>
+<nav aria-label="Menu utama" class="nav">
+<ul class="nav__list">
+<li><a class="nav__link" href="dashboard-super-admin.html"><span aria-hidden="true" class="icon icon--home"></span>Dashboard</a></li>
+<li><a aria-current="page" class="nav__link" href="akun-hak-akses.html"><span aria-hidden="true" class="icon icon--users"></span>Akun dan Hak Akses</a></li>
+<li><a class="nav__link" href="lowongan-persyaratan.html"><span aria-hidden="true" class="icon icon--briefcase"></span>Lowongan dan Persyaratan</a></li>
+<li><a class="nav__link" href="data-pelatihan.html"><span aria-hidden="true" class="icon icon--database"></span>Data Pelatihan</a></li>
+<li><a class="nav__link" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--target"></span>Pengaturan Model</a></li>
+</ul>
+</nav>
+<div class="sidebar__footer">
+<a class="logout" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</aside>
+<!-- TOPBAR -->
+<header class="topbar">
+<div class="topbar__start">
+<button aria-label="Buka/tutup menu" class="menu-btn" type="button"><span aria-hidden="true" class="icon icon--menu"></span></button>
+<nav aria-label="Breadcrumb" class="breadcrumb">
+<ol class="breadcrumb__list">
+<li class="breadcrumb__item"><a href="dashboard-super-admin.html">Super Admin</a></li>
+<li aria-current="page" class="breadcrumb__item">Akun dan Hak Akses</li>
+</ol>
+</nav>
+</div>
+<details class="profile-menu">
+<summary class="profile" aria-label="Menu profil">
+<span class="profile__info">
+<span class="profile__name" style="display:block">Nama Super Admin</span>
+<span class="profile__role" style="display:block">Super Admin</span>
+</span>
+<span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span>
+<span aria-hidden="true" class="icon icon--chevron"></span>
+</summary>
+<div class="profile-menu__list">
+<div class="profile-menu__head"><strong>Nama Super Admin</strong><small>nama@email.com</small><span class="badge badge--info">Super Admin</span></div>
+<a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil</a>
+<a href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span>Tambah Akun</a>
+<a class="is-danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</details>
+</header>
+<!-- KONTEN UTAMA -->
+<main class="main" id="main-content">
+<header class="page-header">
+<h1>Akun dan Hak Akses</h1>
+<p class="page-header__desc">Kelola akun pengguna dan atur peran (User, Sub Admin, Super Admin).</p>
+</header>
+<div class="toolbar">
+<div class="search">
+<label class="visually-hidden" for="cari">Cari nama atau email</label>
+<span aria-hidden="true" class="icon icon--search"></span>
+<input class="search__input" id="cari" placeholder="Cari nama / email" type="search"/>
+</div>
+<div>
+<label class="visually-hidden" for="filter-role">Filter role</label>
+<select class="select-pill" id="filter-role">
+<option>Semua role</option>
+<option>User</option>
+<option>Sub Admin</option>
+<option>Super Admin</option>
+</select>
+</div>
+<div class="toolbar__end">
+<a class="btn btn--primary" href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span> Tambah Akun</a>
+</div>
+</div>
+<div class="table-card">
+<table class="table">
+<caption class="visually-hidden">Daftar akun pengguna</caption>
+<thead>
+<tr>
+<th scope="col">Nama</th>
+<th scope="col">Email</th>
+<th scope="col">Role</th>
+<th scope="col">Aksi</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+<div class="table-footer">
+<p>Menampilkan 1-6 dari X akun</p>
+<nav aria-label="Halaman" class="pagination">
+<a class="page-btn" href="#">Sebelumnya</a>
+<a aria-current="page" class="page-btn" href="#">1</a>
+<a class="page-btn" href="#">2</a>
+<a class="page-btn" href="#">Next</a>
+</nav>
+</div>
+<aside class="note"><p>Hanya Super Admin yang dapat mengubah role dan menghapus akun. Akun Sub Admin dibuat di halaman ini.</p></aside>
+</main>
+</div>
+
+<!-- MODAL AKSI AKUN -->
+<div class="account-modal" id="accountModal"
+     aria-hidden="true">
+
+  <div class="account-modal__backdrop"
+       data-modal-close></div>
+
+  <div class="account-modal__box"
+       id="accountModalBox"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="accountModalTitle">
+
+    <div class="account-modal__header">
+      <h2 id="accountModalTitle">Detail Akun</h2>
+      <button type="button"
+              class="account-modal__close"
+              data-modal-close
+              aria-label="Tutup">&times;</button>
+    </div>
+
+    <div id="accountModalContent"></div>
+
+  </div>
+</div>
+<!-- MODAL KELUAR -->
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal" id="keluar" role="dialog">
+<a aria-label="Batal" class="modal__backdrop" href="#"></a>
+<div class="dialog">
+<span aria-hidden="true" class="dialog__icon"><span class="icon icon--logout"></span></span>
+<div>
+<h2 class="text-h3" id="keluar-judul">Keluar dari akun?</h2>
+<p class="dialog__desc">Kamu perlu masuk lagi untuk mengakses panel admin.</p>
+<div class="dialog__actions"><a class="btn btn--outline" href="#">Batal</a><a class="btn btn--primary" href="../admin-menu.html">Ya, Keluar</a></div>
+</div>
+</div>
+</div>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/chips.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+
+<script src="../../backend/js/shared/admin-menu.js"></script>
+<script src="../../backend/js/shared/account-actions.js"></script>
+
+</body>
+</html>
+

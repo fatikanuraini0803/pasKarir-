@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Riwayat hasil klasifikasi kesesuaian lowongan kerja." name="description"/>
+<title>Riwayat Klasifikasi | Paskarir</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/variables.css" rel="stylesheet"/>
+<link href="css/base.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-user.css" rel="stylesheet"/>
+<link href="css/layout.css" rel="stylesheet"/>
+<link href="css/components.css" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body><a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+<input aria-label="Buka menu navigasi" class="nav-toggle" id="nav-toggle" type="checkbox"/>
+<aside aria-label="Menu utama" class="sidebar">
+<a class="brand" href="../../index.html"><img alt="" height="32" src="../assets/img/logo.svg" width="32"/><span>Paskarir</span></a>
+<nav aria-label="Menu aplikasi" class="sidebar__menu"><ul class="sidebar__nav"><li><a class="nav-link" href="dashboard.html"><span aria-hidden="true" class="icon icon--home"></span><span>Dashboard</span></a></li><li><a class="nav-link" href="klasifikasi.html"><span aria-hidden="true" class="icon icon--check"></span><span>Klasifikasi</span></a></li><li><a class="nav-link" href="lowongan.html"><span aria-hidden="true" class="icon icon--briefcase"></span><span>Lowongan</span></a></li><li><a aria-current="page" class="nav-link" href="riwayat.html"><span aria-hidden="true" class="icon icon--clock"></span><span>Riwayat</span></a></li></ul></nav>
+<div class="sidebar__footer">
+<a class="nav-link nav-link--danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span><span>Keluar</span></a>
+</div>
+</aside>
+<div class="app__main">
+<header class="topbar">
+<div class="topbar__left">
+<label aria-label="Menu" class="icon-btn nav-toggle-label" for="nav-toggle"><span aria-hidden="true" class="icon icon--menu"></span></label>
+<nav aria-label="Breadcrumb"><ol class="breadcrumb"><li><span aria-hidden="true" class="icon icon--home"></span></li><li><a href="dashboard.html">Beranda</a></li><li aria-hidden="true" class="breadcrumb__sep">/</li><li aria-current="page">Riwayat</li></ol></nav>
+</div>
+<details class="profile">
+<summary class="profile__toggle">
+<span class="profile__name"><strong>Nama User</strong><span>User</span></span>
+<span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span><span aria-hidden="true" class="icon icon--chevron"></span>
+</summary>
+<div class="profile__menu">
+<div class="profile__info"><strong>Nama User</strong><small>nama@email.com</small><span class="badge badge--primary">User</span></div>
+<a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil Saya</a>
+<a href="ubah-password.html"><span aria-hidden="true" class="icon icon--lock"></span>Ubah Password</a>
+<a href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</details>
+</header>
+<main class="content" id="main-content">
+<div class="page-head"><h1>Riwayat Klasifikasi</h1><p>Daftar semua hasil klasifikasi yang pernah kamu lakukan. Klik ikon mata untuk melihat detail atau ikon tempat sampah untuk menghapus.</p></div>
+<section aria-label="Ringkasan riwayat" class="stats"><article class="card stat"><span class="icon-tile"><span aria-hidden="true" class="icon icon--chart"></span></span><div><p class="stat__label">Total</p><p class="stat__value">12</p></div></article><article class="card card--primary stat"><span class="icon-tile"><span aria-hidden="true" class="icon icon--check"></span></span><div><p class="stat__label">Sesuai</p><p class="stat__value">7</p></div></article><article class="card stat"><span class="icon-tile"><span aria-hidden="true" class="icon icon--doc"></span></span><div><p class="stat__label">Tidak sesuai</p><p class="stat__value">5</p></div></article></section>
+<form action="riwayat.html" class="toolbar" method="get" role="search">
+<span class="input-wrap toolbar__grow"><label class="visually-hidden" for="cari">Cari lowongan</label><span aria-hidden="true" class="icon icon--search"></span><input class="input" id="cari" name="q" placeholder="Cari lowongan" type="search"/></span>
+<label class="visually-hidden" for="hasil">Filter hasil</label><select class="input input--auto" id="hasil" name="hasil"><option>Semua hasil</option><option>Sesuai</option><option>Tidak sesuai</option></select>
+<a class="btn btn--primary btn--lg" href="klasifikasi.html"><span aria-hidden="true" class="icon icon--plus"></span> Klasifikasi Baru</a>
+</form>
+<section aria-label="Tabel riwayat" class="card"><div class="table-wrap"><table class="table"><caption class="visually-hidden">Riwayat klasifikasi</caption>
+<thead><tr><th scope="col">No</th><th scope="col">Tanggal</th><th scope="col">Lowongan</th><th scope="col">Hasil</th><th scope="col">Aksi</th></tr></thead><tbody><tr><td>1</td><td><time datetime="2026-11-03">03/11/2026</time></td><td>Analis Data</td><td><span class="badge badge--success">Sesuai</span></td><td><a aria-label="Lihat detail Analis Data" class="icon-btn" href="hasil.html"><span aria-hidden="true" class="icon icon--eye"></span></a></td></tr><tr><td>2</td><td><time datetime="2026-10-30">30/10/2026</time></td><td>Staf Pemrograman</td><td><span class="badge badge--danger">Tidak Sesuai</span></td><td><a aria-label="Lihat detail Staf Pemrograman" class="icon-btn" href="hasil.html"><span aria-hidden="true" class="icon icon--eye"></span></a></td></tr><tr><td>3</td><td><time datetime="2026-10-27">27/10/2026</time></td><td>Admin Perkantoran</td><td><span class="badge badge--success">Sesuai</span></td><td><a aria-label="Lihat detail Admin Perkantoran" class="icon-btn" href="hasil.html"><span aria-hidden="true" class="icon icon--eye"></span></a></td></tr><tr><td>4</td><td><time datetime="2026-10-21">21/10/2026</time></td><td>Staf Layanan</td><td><span class="badge badge--danger">Tidak Sesuai</span></td><td><a aria-label="Lihat detail Staf Layanan" class="icon-btn" href="hasil.html"><span aria-hidden="true" class="icon icon--eye"></span></a></td></tr><tr><td>5</td><td><time datetime="2026-10-15">15/10/2026</time></td><td>Staf Administrasi</td><td><span class="badge badge--success">Sesuai</span></td><td><a aria-label="Lihat detail Staf Administrasi" class="icon-btn" href="hasil.html"><span aria-hidden="true" class="icon icon--eye"></span></a></td></tr><tr><td>6</td><td><time datetime="2026-10-09">09/10/2026</time></td><td>Asisten Operasional</td><td><span class="badge badge--danger">Tidak Sesuai</span></td><td><a aria-label="Lihat detail Asisten Operasional" class="icon-btn" href="hasil.html"><span aria-hidden="true" class="icon icon--eye"></span></a></td></tr></tbody></table></div></section>
+<nav aria-label="Halaman" class="pagination"><span>Menampilkan 1-6 dari 12 data</span><ul class="pagination__list"><li><a class="pagination__link" href="#">Sebelumnya</a></li><li><a aria-current="page" class="pagination__link" href="riwayat.html">1</a></li><li><a class="pagination__link" href="#">2</a></li><li><a class="pagination__link" href="#">Next</a></li></ul></nav>
+</main>
+<footer class="app__footer"><small>© 2026 Paskarir | Kelompok 12 - 5IF1 | Semua hak dilindungi</small></footer>
+</div>
+</div>
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal modal--confirm" id="keluar" role="dialog">
+<a aria-label="Tutup" class="modal__backdrop" href="#"></a>
+<div class="modal__box">
+<h2 class="modal__title" id="keluar-judul">Keluar dari akun?</h2>
+<p class="modal__lead">Kamu akan keluar dan diarahkan ke halaman Login.</p>
+<div class="modal__actions modal__actions--center">
+<a class="btn btn--danger" href="login.html">Ya, Keluar</a>
+<a class="btn btn--outline" href="#">Batal</a>
+</div>
+</div>
+</div>
+<div aria-labelledby="hapus-judul" aria-modal="true" class="modal modal--confirm" id="hapus-riwayat" role="dialog">
+<div class="modal__backdrop" data-modal-close=""></div>
+<div class="modal__box">
+<h2 class="modal__title" id="hapus-judul">Hapus riwayat ini?</h2>
+<p class="modal__lead" id="hapus-teks">Riwayat klasifikasi ini akan dihapus dan tidak bisa dikembalikan.</p>
+<div class="modal__actions modal__actions--center">
+<button class="btn btn--danger" id="hapus-ya" type="button">Ya, Hapus</button>
+<button class="btn btn--outline" data-modal-close="" type="button">Batal</button>
+</div>
+</div>
+</div>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/user/list-filter.js"></script>
+</body>
+</html>

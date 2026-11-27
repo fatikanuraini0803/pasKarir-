@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tambah Akun | Super Admin</title>
+<link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/pages.css" rel="stylesheet"/>
+<link href="../assets/icons/icons-admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/admin-common.css">
+<link href="../assets/css/feedback.css" rel="stylesheet"/>
+</head>
+<body><a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+<div class="brand">
+<img alt="" class="brand__img" height="40" src="../assets/img/logo.svg" width="40"/>
+<span class="brand__name">Paskarir</span>
+</div>
+<nav aria-label="Menu utama" class="nav">
+<ul class="nav__list">
+<li><a class="nav__link" href="dashboard-super-admin.html"><span aria-hidden="true" class="icon icon--home"></span>Dashboard</a></li>
+<li><a aria-current="page" class="nav__link" href="akun-hak-akses.html"><span aria-hidden="true" class="icon icon--users"></span>Akun dan Hak Akses</a></li>
+<li><a class="nav__link" href="lowongan-persyaratan.html"><span aria-hidden="true" class="icon icon--briefcase"></span>Lowongan dan Persyaratan</a></li>
+<li><a class="nav__link" href="data-pelatihan.html"><span aria-hidden="true" class="icon icon--database"></span>Data Pelatihan</a></li>
+<li><a class="nav__link" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--target"></span>Pengaturan Model</a></li>
+</ul>
+</nav>
+<div class="sidebar__footer">
+<a class="logout" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</aside>
+<!-- TOPBAR -->
+<header class="topbar">
+<div class="topbar__start">
+<button aria-label="Buka/tutup menu" class="menu-btn" type="button"><span aria-hidden="true" class="icon icon--menu"></span></button>
+<nav aria-label="Breadcrumb" class="breadcrumb">
+<ol class="breadcrumb__list">
+<li class="breadcrumb__item"><a href="dashboard-super-admin.html">Super Admin</a></li>
+<li class="breadcrumb__item"><a href="akun-hak-akses.html">Akun dan Hak Akses</a></li>
+<li aria-current="page" class="breadcrumb__item">Tambah Akun</li>
+</ol>
+</nav>
+</div>
+<details class="profile-menu">
+<summary class="profile" aria-label="Menu profil">
+<span class="profile__info">
+<span class="profile__name" style="display:block">Nama Super Admin</span>
+<span class="profile__role" style="display:block">Super Admin</span>
+</span>
+<span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span>
+<span aria-hidden="true" class="icon icon--chevron"></span>
+</summary>
+<div class="profile-menu__list">
+<div class="profile-menu__head"><strong>Nama Super Admin</strong><small>nama@email.com</small><span class="badge badge--info">Super Admin</span></div>
+<a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil</a>
+<a href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span>Tambah Akun</a>
+<a class="is-danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+</div>
+</details>
+</header>
+<!-- KONTEN UTAMA -->
+<main class="main" id="main-content">
+<header class="page-header">
+<h1>Tambah Akun</h1>
+<p class="page-header__desc">Buat akun baru dan tentukan perannya. Akun Sub Admin hanya dibuat oleh Super Admin.</p>
+</header>
+<div class="layout-split layout-split--form">
+<section aria-label="Form tambah akun" class="card">
+<form action="akun-hak-akses.html" class="form-grid" method="get">
+<div class="form-group form-group--full"><label class="label" for="t-nama">Nama lengkap</label><div class="control"><span aria-hidden="true" class="icon icon--user"></span><input class="input" id="t-nama" name="nama" placeholder="Nama lengkap" required type="text"/></div></div>
+<div class="form-group form-group--full"><label class="label" for="t-email">Email</label><input class="input" id="t-email" name="email" placeholder="nama@email.com" required type="email" style="padding-left:16px"/></div>
+<div class="form-group form-group--full"><label class="label" for="t-role">Role</label><select class="select" id="t-role" name="role" required><option value="">Pilih role</option><option>User</option><option>Sub Admin</option><option>Super Admin</option></select></div>
+<div class="form-group"><label class="label" for="t-pw">Password</label><span class="pw-wrap"><input class="input" id="t-pw" minlength="8" name="password" placeholder="Min. 8 karakter" required type="password"/><button aria-controls="t-pw" aria-label="Tampilkan password" aria-pressed="false" class="pw-toggle" data-toggle-password="t-pw" type="button"><span aria-hidden="true" class="icon icon--eye"></span></button></span></div>
+<div class="form-group"><label class="label" for="t-konf">Konfirmasi password</label><span class="pw-wrap"><input class="input" id="t-konf" minlength="8" name="konfirmasi" placeholder="Ulangi password" required type="password"/><button aria-controls="t-konf" aria-label="Tampilkan password" aria-pressed="false" class="pw-toggle" data-toggle-password="t-konf" type="button"><span aria-hidden="true" class="icon icon--eye"></span></button></span></div>
+<div class="form-group--full form-actions form-actions--end"><a class="btn btn--outline" href="akun-hak-akses.html">Batal</a><button class="btn btn--primary" type="submit"><span aria-hidden="true" class="icon icon--plus"></span> Simpan Akun</button></div>
+</form>
+</section>
+<aside class="card card--muted info-card"><span aria-hidden="true" class="icon icon--shield"></span><p class="info-card__text">Pilih peran sesuai kebutuhan. Super Admin dapat mengelola semua data dan akun, Sub Admin hanya mengelola lowongan dan panduan, User hanya menggunakan klasifikasi.</p></aside>
+</div>
+</main>
+</div>
+<!-- MODAL KELUAR -->
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal" id="keluar" role="dialog">
+<a aria-label="Batal" class="modal__backdrop" href="#"></a>
+<div class="dialog">
+<span aria-hidden="true" class="dialog__icon"><span class="icon icon--logout"></span></span>
+<div>
+<h2 class="text-h3" id="keluar-judul">Keluar dari akun?</h2>
+<p class="dialog__desc">Kamu perlu masuk lagi untuk mengakses panel admin.</p>
+<div class="dialog__actions"><a class="btn btn--outline" href="#">Batal</a><a class="btn btn--primary" href="../admin-menu.html">Ya, Keluar</a></div>
+</div>
+</div>
+</div>
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+<script src="../../backend/js/super-admin/tambah-akun.js"></script>
+<script src="../../backend/js/shared/admin-menu.js" defer></script>
+</body>
+</html>

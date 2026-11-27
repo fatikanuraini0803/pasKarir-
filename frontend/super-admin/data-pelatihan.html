@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Pelatihan | Super Admin</title>
+    <link href="../assets/img/logo.svg" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="css/pages.css" rel="stylesheet" />
+    <link href="../assets/icons/icons-admin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/admin-common.css" />
+    <link href="../assets/css/feedback.css" rel="stylesheet" />
+
+    <!-- CSS khusus modal detail data pelatihan -->
+    <style>
+        .detail-pelatihan-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .detail-pelatihan-modal.is-open {
+            display: flex;
+        }
+
+        .detail-pelatihan-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+        }
+
+        .detail-pelatihan-box {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 540px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.20);
+        }
+
+        .detail-pelatihan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .detail-pelatihan-header h2 {
+            margin: 0;
+            color: #1e293b;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .detail-pelatihan-close {
+            display: inline-flex;
+            width: 36px;
+            height: 36px;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 36px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #64748b;
+            font: inherit;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .detail-pelatihan-close:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .detail-pelatihan-content {
+            display: grid;
+            gap: 12px;
+        }
+
+        .detail-pelatihan-item {
+            padding: 13px 15px;
+            border-radius: 9px;
+            background: #f8fafc;
+        }
+
+        .detail-pelatihan-item small {
+            display: block;
+            margin-bottom: 5px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .detail-pelatihan-item strong {
+            display: block;
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .detail-pelatihan-status {
+            display: inline-block;
+            width: fit-content;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .detail-pelatihan-status.is-sesuai {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .detail-pelatihan-status.is-tidak-sesuai {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .detail-pelatihan-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .detail-pelatihan-footer button {
+            padding: 10px 20px;
+            border: 0;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #fff;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .detail-pelatihan-footer button:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 480px) {
+            .detail-pelatihan-box {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+<div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <img alt="" class="brand__img" height="40" src="../assets/img/logo.svg" width="40" />
+            <span class="brand__name">Paskarir</span>
+        </div>
+        <nav aria-label="Menu utama" class="nav">
+            <ul class="nav__list">
+                <li><a class="nav__link" href="dashboard-super-admin.html"><span aria-hidden="true" class="icon icon--home"></span>Dashboard</a></li>
+                <li><a class="nav__link" href="akun-hak-akses.html"><span aria-hidden="true" class="icon icon--users"></span>Akun dan Hak Akses</a></li>
+                <li><a class="nav__link" href="lowongan-persyaratan.html"><span aria-hidden="true" class="icon icon--briefcase"></span>Lowongan dan Persyaratan</a></li>
+                <li><a aria-current="page" class="nav__link" href="data-pelatihan.html"><span aria-hidden="true" class="icon icon--database"></span>Data Pelatihan</a></li>
+                <li><a class="nav__link" href="pengaturan-model.html"><span aria-hidden="true" class="icon icon--target"></span>Pengaturan Model</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar__footer">
+            <a class="logout" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+        </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar__start">
+            <button aria-label="Buka/tutup menu" class="menu-btn" type="button"><span aria-hidden="true" class="icon icon--menu"></span></button>
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol class="breadcrumb__list">
+                    <li class="breadcrumb__item"><a href="dashboard-super-admin.html">Super Admin</a></li>
+                    <li aria-current="page" class="breadcrumb__item">Data Pelatihan</li>
+                </ol>
+            </nav>
+        </div>
+        <details class="profile-menu">
+            <summary class="profile" aria-label="Menu profil">
+                <span class="profile__info">
+                    <span class="profile__name" style="display:block">Nama Super Admin</span>
+                    <span class="profile__role" style="display:block">Super Admin</span>
+                </span>
+                <span class="avatar"><span aria-hidden="true" class="icon icon--user"></span></span>
+                <span aria-hidden="true" class="icon icon--chevron"></span>
+            </summary>
+            <div class="profile-menu__list">
+                <div class="profile-menu__head"><strong>Nama Super Admin</strong><small>nama@email.com</small><span class="badge badge--info">Super Admin</span></div>
+                <a href="profil.html"><span aria-hidden="true" class="icon icon--user"></span>Profil</a>
+                <a href="tambah-akun.html"><span aria-hidden="true" class="icon icon--plus"></span>Tambah Akun</a>
+                <a class="is-danger" href="#keluar"><span aria-hidden="true" class="icon icon--logout"></span>Keluar</a>
+            </div>
+        </details>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main" id="main-content">
+        <header class="page-header">
+            <h1>Data Pelatihan</h1>
+            <p class="page-header__desc">Dataset untuk melatih Decision Tree: data pelamar beserta label Sesuai / Tidak Sesuai.</p>
+        </header>
+
+        <section aria-label="Ringkasan" class="stats">
+            <article class="stat-card stat-card--primary">
+                <span class="stat-card__icon"><span aria-hidden="true" class="icon icon--database icon--lg"></span></span>
+                <div>
+                    <p class="stat-card__label">Total data</p>
+                    <p class="stat-card__value" id="statTotal">XXXX</p>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-card__icon"><span aria-hidden="true" class="icon icon--check icon--lg"></span></span>
+                <div>
+                    <p class="stat-card__label">Label Sesuai</p>
+                    <p class="stat-card__value" id="statSesuai">XXX</p>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-card__icon"><span aria-hidden="true" class="icon icon--document icon--lg"></span></span>
+                <div>
+                    <p class="stat-card__label">Label Tidak Sesuai</p>
+                    <p class="stat-card__value" id="statTidak">XXX</p>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-card__icon"><span aria-hidden="true" class="icon icon--clock icon--lg"></span></span>
+                <div>
+                    <p class="stat-card__label">Diperbarui</p>
+                    <p class="stat-card__value" id="statUpdate">dd/mm</p>
+                </div>
+            </article>
+        </section>
+
+        <div class="toolbar">
+            <div class="search">
+                <label class="visually-hidden" for="cari">Cari data pelatihan</label>
+                <span aria-hidden="true" class="icon icon--search"></span>
+                <input class="search__input" id="cari" placeholder="Cari data" type="search" />
+            </div>
+            <div class="toolbar__end">
+                <button class="btn btn--outline" id="btnImportCsv" type="button"><span aria-hidden="true" class="icon icon--upload"></span> Import CSV</button>
+                <input accept=".csv,text/csv" class="visually-hidden" hidden id="inputImportCsv" tabindex="-1" type="file" />
+                <a class="btn btn--primary" href="form-data-pelatihan.html"><span aria-hidden="true" class="icon icon--plus"></span> Tambah Data</a>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <table class="table">
+                <caption class="visually-hidden">Data pelatihan model</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Keterampilan</th>
+                        <th scope="col">Pendidikan</th>
+                        <th scope="col">Pengalaman</th>
+                        <th scope="col">Sertifikasi</th>
+                        <th scope="col">Label</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pemrograman, Basis Data</td>
+                        <td>S1</td>
+                        <td>2 th</td>
+                        <td>Ya</td>
+                        <td><span class="badge badge--success">Sesuai</span></td>
+                        <td><div class="actions">
+                            <a aria-label="Lihat data pelatihan" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                            <a aria-label="Ubah data pelatihan" class="icon-btn" href="form-data-pelatihan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                            <button aria-label="Hapus data pelatihan" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Pemrograman, Basis Data</td>
+                        <td>S1</td>
+                        <td>2 th</td>
+                        <td>Ya</td>
+                        <td><span class="badge badge--danger">Tidak Sesuai</span></td>
+                        <td><div class="actions">
+                            <a aria-label="Lihat data pelatihan" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                            <a aria-label="Ubah data pelatihan" class="icon-btn" href="form-data-pelatihan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                            <button aria-label="Hapus data pelatihan" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Pemrograman, Basis Data</td>
+                        <td>S1</td>
+                        <td>2 th</td>
+                        <td>Ya</td>
+                        <td><span class="badge badge--success">Sesuai</span></td>
+                        <td><div class="actions">
+                            <a aria-label="Lihat data pelatihan" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                            <a aria-label="Ubah data pelatihan" class="icon-btn" href="form-data-pelatihan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                            <button aria-label="Hapus data pelatihan" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Pemrograman, Basis Data</td>
+                        <td>S1</td>
+                        <td>2 th</td>
+                        <td>Ya</td>
+                        <td><span class="badge badge--danger">Tidak Sesuai</span></td>
+                        <td><div class="actions">
+                            <a aria-label="Lihat data pelatihan" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                            <a aria-label="Ubah data pelatihan" class="icon-btn" href="form-data-pelatihan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                            <button aria-label="Hapus data pelatihan" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Pemrograman, Basis Data</td>
+                        <td>S1</td>
+                        <td>2 th</td>
+                        <td>Ya</td>
+                        <td><span class="badge badge--success">Sesuai</span></td>
+                        <td><div class="actions">
+                            <a aria-label="Lihat data pelatihan" class="icon-btn" href="#" title="Lihat"><span aria-hidden="true" class="icon icon--eye"></span></a>
+                            <a aria-label="Ubah data pelatihan" class="icon-btn" href="form-data-pelatihan.html" title="Ubah"><span aria-hidden="true" class="icon icon--edit"></span></a>
+                            <button aria-label="Hapus data pelatihan" class="icon-btn" title="Hapus" type="button"><span aria-hidden="true" class="icon icon--trash"></span></button>
+                        </div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <p id="infoTabel">Menampilkan 1-5 dari XXXX data</p>
+            <nav aria-label="Halaman" class="pagination">
+                <a class="page-btn" href="#">Sebelumnya</a>
+                <a aria-current="page" class="page-btn" href="#">1</a>
+                <a class="page-btn" href="#">2</a>
+                <a class="page-btn" href="#">Next</a>
+            </nav>
+        </div>
+
+        <aside class="note"><p>Format CSV: keterampilan, pendidikan, pengalaman, sertifikasi, label. Data baru dipakai saat "Latih Ulang Model".</p></aside>
+    </main>
+</div>
+
+<!-- MODAL KELUAR (tetap dipertahankan) -->
+<div aria-labelledby="keluar-judul" aria-modal="true" class="modal" id="keluar" role="dialog">
+    <a aria-label="Batal" class="modal__backdrop" href="#"></a>
+    <div class="dialog">
+        <span aria-hidden="true" class="dialog__icon"><span class="icon icon--logout"></span></span>
+        <div>
+            <h2 class="text-h3" id="keluar-judul">Keluar dari akun?</h2>
+            <p class="dialog__desc">Kamu perlu masuk lagi untuk mengakses panel admin.</p>
+            <div class="dialog__actions"><a class="btn btn--outline" href="#">Batal</a><a class="btn btn--primary" href="../admin-menu.html">Ya, Keluar</a></div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DETAIL DATA PELATIHAN -->
+<div class="detail-pelatihan-modal" id="detailPelatihanModal" aria-hidden="true">
+    <div class="detail-pelatihan-backdrop" data-tutup-detail></div>
+    <div class="detail-pelatihan-box" role="dialog" aria-modal="true" aria-labelledby="judulDetailPelatihan">
+        <div class="detail-pelatihan-header">
+            <h2 id="judulDetailPelatihan">Detail Data Pelatihan</h2>
+            <button type="button" class="detail-pelatihan-close" data-tutup-detail aria-label="Tutup">&times;</button>
+        </div>
+        <div class="detail-pelatihan-content" id="isiDetailPelatihan"></div>
+        <div class="detail-pelatihan-footer">
+            <button type="button" data-tutup-detail>Tutup</button>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT BAWAAN HALAMAN (tetap dipertahankan) -->
+<script src="../../backend/js/shared/core.js"></script>
+<script src="../../backend/js/shared/common.js"></script>
+<script src="../../backend/js/shared/admin-common.js"></script>
+<script src="../../backend/js/shared/admin-menu.js" defer></script>
+<script src="../../backend/js/shared/table-tools.js"></script>
+<script src="../../backend/js/super-admin/data-pelatihan.js"></script>
+
+<!-- SCRIPT KHUSUS IKON LIHAT DATA PELATIHAN -->
+<script>
+(function () {
+    'use strict';
+
+    const tabelBody = document.querySelector('.table tbody');
+    const modal = document.getElementById('detailPelatihanModal');
+    const isiDetail = document.getElementById('isiDetailPelatihan');
+    let tombolTerakhir = null;
+
+    if (!tabelBody || !modal || !isiDetail) {
+        console.error('Elemen tabel atau modal detail data pelatihan tidak ditemukan.');
+        return;
+    }
+
+    function bukaModal(baris, tombol) {
+        const kolom = baris.querySelectorAll('td');
+
+        if (kolom.length < 5) {
+            console.error('Data pada baris tabel tidak lengkap.');
+            return;
+        }
+
+        const keterampilan = kolom[0].textContent.trim() || '-';
+        const pendidikan = kolom[1].textContent.trim() || '-';
+        const pengalaman = kolom[2].textContent.trim() || '-';
+        const sertifikasi = kolom[3].textContent.trim() || '-';
+        const label = kolom[4].textContent.trim() || '-';
+
+        isiDetail.replaceChildren();
+
+        const data = [
+            ['Keterampilan', keterampilan],
+            ['Pendidikan', pendidikan],
+            ['Pengalaman', pengalaman],
+            ['Sertifikasi', sertifikasi]
+        ];
+
+        data.forEach(function (itemData) {
+            const item = document.createElement('div');
+            item.className = 'detail-pelatihan-item';
+
+            const labelElemen = document.createElement('small');
+            labelElemen.textContent = itemData[0];
+
+            const nilaiElemen = document.createElement('strong');
+            nilaiElemen.textContent = itemData[1];
+
+            item.appendChild(labelElemen);
+            item.appendChild(nilaiElemen);
+            isiDetail.appendChild(item);
+        });
+
+        const itemLabel = document.createElement('div');
+        itemLabel.className = 'detail-pelatihan-item';
+
+        const labelJudul = document.createElement('small');
+        labelJudul.textContent = 'Label';
+
+        const labelNilai = document.createElement('span');
+        labelNilai.className = 'detail-pelatihan-status ' +
+            (label.toLowerCase().includes('tidak') ? 'is-tidak-sesuai' : 'is-sesuai');
+        labelNilai.textContent = label;
+
+        itemLabel.appendChild(labelJudul);
+        itemLabel.appendChild(labelNilai);
+        isiDetail.appendChild(itemLabel);
+
+        tombolTerakhir = tombol;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        const tombolTutup = modal.querySelector('.detail-pelatihan-close');
+        if (tombolTutup) tombolTutup.focus();
+    }
+
+    function tutupModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+
+        if (tombolTerakhir) tombolTerakhir.focus();
+    }
+
+    // Event delegation: tetap berfungsi untuk semua ikon mata pada baris tabel.
+    tabelBody.addEventListener('click', function (event) {
+        const tombolLihat = event.target.closest('a[title="Lihat"]');
+        if (!tombolLihat || !tabelBody.contains(tombolLihat)) return;
+
+        event.preventDefault();
+        const baris = tombolLihat.closest('tr');
+        if (baris) bukaModal(baris, tombolLihat);
+    });
+
+    modal.querySelectorAll('[data-tutup-detail]').forEach(function (elemen) {
+        elemen.addEventListener('click', tutupModal);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            tutupModal();
+        }
+    });
+})();
+</script>
+</body>
+</html>
